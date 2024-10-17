@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Barlow', sans-serif;
+    background-color: white;
+}
+
+:root {
+    --tamanho-header: 80px;
+    --tamanho-banner: calc(50vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
+    --tamanho-login: calc(100vh - var(--tamanho-header) - var(--tamnho-footer) - 2px);
+    --tamanho-footer: 65px;
+}
+
+.header {
+    height: var(--tamnho-header);
+    border-bottom: 4px solid #CDDC39;
+    display: flex;
+    justify-content: space-around;
+    color: azure;
+    background-color: #0288D1;
+}
+
+.header .container {
+    display: flex;
+    width: 80%;
+    margin: auto;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.header .menu{
+    display: flex;
+}
+
+.navbar {
+    width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    color: #e3b062;
+    font-size: 20px;
+}
+
+.header a {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+.header .pesquisa {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+.header .menu .login{
+    background-color: #FFF8E1;
+    padding: 10px 30px;
+    border-radius: 20px;
+    font-size: 20px;
+}
+
+.header .menu .login_cadastro{
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    color: black;
+}
+
+.header .menu .cadastro{
+    background-color: #FFF8E1;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 20px;
+}
+
+.agora{
+    font-weight: 800;
+}
+
+.logo h2{
+    font-size: 35px;
+    color: #FAFAFA;
+    width: fit-content;
+    font-weight: 800;
+}
+
+.banner {
+    height: var(--tamanho-banner);
+    color: white;
+    background-image: url('../projPessoal/banner.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.banner .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.banner .container p{
+    margin: 0;
+    padding: 0;
+    font-size: 36px;
+}
+
+.banner .container span {
+    font-weight: 800;
+}
+
+.footer {
+    background-color: black;
+    height: var(--tamanho-footer);
+    color: #fff;
+    display: flex;
+    font-size: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer .container{
+    display: flex;    
+}
+
+.version {
+    font-size: 12px;
+}
