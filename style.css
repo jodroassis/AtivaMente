@@ -21,7 +21,7 @@ body{
     display: flex;
     justify-content: space-around;
     color: azure;
-    background-color: #0288D1;
+    background-color: #000;
 }
 
 .header .container {
@@ -141,6 +141,41 @@ body{
     color: #FFEB3B;
 }
 
+.body .tituloArtigo{
+    padding-left: 40px;
+    padding-right: 40px;
+    border-bottom: #000;
+}
+
+.body .artigo{
+    display: flex;
+    padding-left: 50px;
+    padding-right: 45px;
+    flex-direction: column;
+}
+
+.body .artigo img {
+    width: 50%;
+    height: 50%;
+    padding-left: 300px;
+}
+
+.body hr{
+    width: 100%;
+}
+
+.icone {
+    width: 100px;
+    height: 100px;
+    background-image: url('https://cdn-icons-png.flaticon.com/512/706/706830.png');
+    background-size: cover;
+}
+
+.card_autor{
+    display: flex;
+    gap: 10px;
+}
+
 .footer {
     background-color: black;
     height: var(--tamanho-footer);
@@ -158,3 +193,4 @@ body{
 .version {
     font-size: 12px;
 }
+
