@@ -5,13 +5,11 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
     background-color: #f7f7f7;
     color: #333;
-    line-height: 1.6;
 }
 
 .header{
@@ -53,7 +51,7 @@ body {
     list-style: none;
 }
 
-.header .menu .login{
+.header .menu .botao-login{
     background-color: #FFF8E1;
     color: black;
     padding: 10px 30px;
@@ -61,7 +59,7 @@ body {
     font-size: 20px;
 }
 
-.header .menu .cadastro{
+.header .menu .botao-cadastro{
     background-color: #FFF8E1;
     color: black;
     padding: 10px 20px;
@@ -130,10 +128,11 @@ body {
 }
 
 .artigo img {
-    width: 70%;
+    width: 50%;
+    height: 50%;
     border-radius: 5px;
     margin: 20px;
-    padding-left: 400px;
+    padding-left: 350px;
 }
 
 .intro {
@@ -183,19 +182,64 @@ body {
     color: #ccc;
 }
 
-.container-login {
+.login {
     display: flex;
-    height: 86vh;
+    height: 88vh;
+    background-image: url(../AtivaMente/img/banner_cadastro.jpg);
     background-size: cover;
+    background-position: center;
 }
 
-.container-login img{
-    width: 100%;
-    height: 100%;
-}
-
-.card .card-cadastro{
+.login .container{
     display: flex;
     justify-content: center;
+    background-color: #e5e5e5;
+    color: #EC155B;
+    border-radius: 15px;
+    padding: 0px 20px 20px 20px;
+    width: 40%;
+    font-weight: 800;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    width: 100%;
+}
+
+.card h2{
+    font-size: 40px;
+}
+
+.campo{
+    display: flex;
+    flex-direction: column;
+    width:550px;
+}
+
+.formulario{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login input{
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #32b9cd;
+    font-size: 15px;
+    text-align: center;
+}
+
+.botao {
+    display: flex;
+    background-color: #EC155B;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 15px;
+    text-align: center;
+    padding: 5px 25px;
 }
