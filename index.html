@@ -15,7 +15,7 @@
         <nav class="menu">
           <ul class="navbar">
             <li><a href="#" class="agora">Inicial</a></li>
-            <li><a href="pesquisa.html">Pesquisa</a></li>
+            <li><a href="pesquisa.html" class="pesquisa">Pesquisa</a></li>
             <li><a href="sobre.html" class="sobre">Sobre o Projeto</a></li>
             <li>|</li>
             <li><a href="login.html" class="botao-login">Login</a></li>
@@ -39,13 +39,17 @@
         <option value="populares">Mais Populares</option>
         <option value="curtidos">Mais Curtidos</option>
       </select>
-      <input type="text" class="pesquisa" placeholder="Pesquisar artigos...">
+      <input
+        type="text"
+        class="input_pesquisa"
+        placeholder="Pesquisar artigos..."
+      />
     </div>
 
     <!-- Cards de Artigos -->
     <div class="cards-artigos">
       <div class="card">
-        <img src="../AtivaMente/img/sport-svgrepo-com.svg">
+        <img src="../AtivaMente/img/sport-svgrepo-com.svg" />
         <div class="card-conteudo">
           <h2 class="card-titulo">
             Importância dos Esportes no Desenvolvimento
@@ -55,17 +59,26 @@
             Exploramos como o esporte é essencial no desenvolvimento físico,
             mental e social...
           </p>
-          <div class="card-curtida">
-            <img src="../AtivaMente/img/curtida.png" alt="Curtidas"/>
-            <span>123 curtidas</span>
+          <div class="card-curtida-vizualizacao">
+            <div class="card-curtida">
+              <img src="../AtivaMente/img/curtida.png" alt="Curtidas" />
+              <span>123 curtidas</span>
+            </div>
+            <div class="card-vizualizacao">
+              <img
+                src="../AtivaMente/img/view-simple-815-svgrepo-com.svg"
+                alt="Curtidas"
+              />
+              <span>1.000 views</span>
+            </div>
           </div>
-          <a href="artigo1.html" class="leia">Leia mais</a>
+          <a href="artigo1.html" class="leia" onclick="vizualizar3()">Leia mais</a>
         </div>
       </div>
 
       <!-- Card 2 -->
       <div class="card">
-        <img src="../AtivaMente/img/brain-svgrepo-com.svg">
+        <img src="../AtivaMente/img/brain-svgrepo-com.svg" />
         <div class="card-conteudo">
           <h2 class="card-titulo">Como o Esporte Ajuda na Saúde Mental</h2>
           <p class="card-autor">por Maria Silva | 18 Nov 2024</p>
@@ -73,47 +86,78 @@
             Descubra os benefícios do esporte no combate ao estresse e na
             melhora da saúde mental...
           </p>
-          <div class="card-curtida">
-            <img src="../AtivaMente/img/curtida.png" alt="Curtidas" />
-            <span>98 curtidas</span>
+          <div class="card-curtida-vizualizacao">
+            <div class="card-curtida">
+              <img src="../AtivaMente/img/curtida.png" alt="Curtidas" />
+              <span>520 curtidas</span>
+            </div>
+            <div class="card-vizualizacao">
+              <img
+                src="../AtivaMente/img/view-simple-815-svgrepo-com.svg"
+                alt="Curtidas"
+              />
+              <span>1.617 views</span>
+            </div>
           </div>
-          <a href="artigo2.html" class="leia">Leia mais</a>
+          <a href="artigo2.html" class="leia" onclick="vizualizar2()">Leia mais</a>
         </div>
       </div>
 
       <!-- Card 3 -->
       <div class="card">
-        <img src="../AtivaMente/img/avatar-child-girl-svgrepo-com.svg">
+        <img src="../AtivaMente/img/avatar-child-girl-svgrepo-com.svg" />
         <div class="card-conteudo">
-          <h2 class="card-titulo">Esportes para Crianças: Benefícios e Dicas</h2>
+          <h2 class="card-titulo">
+            Esportes para Crianças: Benefícios e Dicas
+          </h2>
           <p class="card-autor">por Carlos Souza | 15 Nov 2024</p>
           <p class="card-descricao">
             Entenda como os esportes auxiliam no desenvolvimento das crianças e
             como incentivá-las...
           </p>
-          <div class="card-curtida">
-            <img src="../AtivaMente/img/curtida.png" alt="Curtidas" />
-            <span>205 curtidas</span>
+          <div class="card-curtida-vizualizacao">
+            <div class="card-curtida">
+              <img src="../AtivaMente/img/curtida.png" alt="Curtidas" />
+              <span>714 curtidas</span>
+            </div>
+            <div class="card-vizualizacao">
+              <img
+                src="../AtivaMente/img/view-simple-815-svgrepo-com.svg"
+                alt="Curtidas"
+              />
+              <span>863 views</span>
+            </div>
           </div>
-          <a href="artigo3.html" class="leia">Leia mais</a>
+          <a href="artigo3.html" class="leia" onclick="vizualizar3()">Leia mais</a>
         </div>
       </div>
 
       <!-- Card 4 -->
       <div class="card">
-        <img src="../AtivaMente/img/the-ball-svgrepo-com.svg">
+        <img src="../AtivaMente/img/the-ball-svgrepo-com.svg" />
         <div class="card-conteudo">
-          <h2 class="card-titulo">Práticas Esportivas para uma Vida Saudável</h2>
+          <h2 class="card-titulo">
+            Práticas Esportivas para uma Vida Saudável
+          </h2>
           <p class="card-autor">por Ana Paula | 10 Nov 2024</p>
           <p class="card-descricao">
             Veja como a prática regular de esportes pode transformar sua
             qualidade de vida...
           </p>
-          <div class="card-curtida">
-            <img src="../AtivaMente/img/curtida.png" alt="Curtidas" />
-            <span>150 curtidas</span>
+          <div class="card-curtida-vizualizacao">
+            <div class="card-curtida">
+              <img src="../AtivaMente/img/curtida.png" alt="Curtidas" />
+              <span>217 curtidas</span>
+            </div>
+            <div class="card-vizualizacao">
+              <img
+                src="../AtivaMente/img/view-simple-815-svgrepo-com.svg"
+                alt="Curtidas"
+              />
+              <span>153 views</span>
+            </div>
           </div>
-          <a href="artigo4.html" class="leia">Leia mais</a>
+          <a href="artigo4.html" class="leia" onclick="vizualizar4()">Leia mais</a>
         </div>
       </div>
     </div>
@@ -138,3 +182,9 @@
     </div>
   </body>
 </html>
+
+<script>
+  function vizualizar(){
+
+  }
+</script>
