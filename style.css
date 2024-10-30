@@ -107,7 +107,7 @@ body {
     filter: brightness(50%);
 }
 
-.banner-text {
+.banner-texto {
     position: absolute;
     color: white;
     font-size: 50px;
@@ -178,23 +178,36 @@ body {
 }
 
 .footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: var(--tamanho-footer);
-    background-color: #646363;
+    background-color: #646464;
     color: white;
-    font-family: 'Barlow', sans-serif;
-    padding: 0 40px;
+    text-align: center;
+    padding: 20px 0;
 }
 
-.icones_redes{
+.footer p {
+    margin-bottom: 5px;
+}
+
+.footer .icones_redes {
     display: flex;
+    justify-content: center;
     gap: 10px;
+    margin-top: 5px;
 }
 
-.version{
-    font-size: 15px;
+.footer .icones_redes img {
+    width: 20px;
+    transition: transform 0.3s ease;
+}
+
+.footer .icones_redes a:hover img {
+    transform: scale(1.1);
+}
+
+.version {
+    font-size: 12px;
+    color: #ffffff;
+    margin-left: 5px;
 }
 
 .login {
@@ -289,3 +302,143 @@ body {
   .login .botao:hover {
     background-color: #45a049;
   }
+
+
+  /* Cards de artigos */
+  .container-filtro {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+
+.slt_filtro, .pesquisa {
+    margin: 0 10px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.pesquisa {
+    width: 50%;
+    border-radius: 5px;
+    border-color: #45a049;
+}
+
+/* Cards de Artigos */
+.cards-artigos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    background-color: #fff;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-conteudo {
+    padding: 15px;
+}
+
+.card-titulo {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-autor {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.card-descricao {
+    font-size: 15px;
+    color: #555;
+}
+
+.card-curtida {
+    font-size: 14px;
+    color: #888;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.card-curtida img {
+    margin-right: 5px;
+    width: 10%;
+    height: 10%;
+}
+
+.leia {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #0057b8;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.leia:hover {
+    background-color: #004499;
+}
+
+/* Seção de Curtidas */
+.container-curtida {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    color: #333;
+    justify-content: center;
+}
+
+.botao-curtida {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.botao-curtida img {
+    width: 20px;
+    height: 20px;
+}
+
+.botao-curtida:hover {
+    background-color: #45a049;
+}
+
+#span_curtida {
+    margin-left: 10px;
+    color: #555;
+}
