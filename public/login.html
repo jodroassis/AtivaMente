@@ -94,7 +94,6 @@
 
         var emailVar = email_input.value;
         var senhaVar = senha_input.value;
-        var cpfVar = cpf_input.value;
 
         if (emailVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
@@ -117,7 +116,6 @@
             body: JSON.stringify({
                 emailServer: emailVar,
                 senhaServer: senhaVar,
-                cpfServer: cpfVar,
             })
         }).then(function (resposta) {
             console.log("ESTOU NO THEN DO entrar()!")

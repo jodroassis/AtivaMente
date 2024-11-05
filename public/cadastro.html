@@ -50,6 +50,14 @@
                          Assim que inserir vá para o script abaixo.
                      -->
             <div class="campo">
+              <span>Código de ativação:</span>
+              <input
+                id="codigo_input"
+                type="text"
+                placeholder="Insira aqui seu código"
+              />
+            </div>
+            <div class="campo">
               <span>Nome:</span>
               <input id="nome_input" type="text" placeholder="Seu nome" />
               <div id="div_erro_nome"></div>
@@ -65,11 +73,7 @@
             </div>
             <div class="campo">
               <span>Data de Nascimento</span>
-              <input
-                id="dtNasc_input"
-                type="date"
-                placeholder="DD/MM/AAAA"
-              />
+              <input id="dtNasc_input" type="text" placeholder="AAAA-MM-DD" />
             </div>
             <div class="campo">
               <span>CPF:</span>
@@ -107,14 +111,21 @@
 
     <!--footer inicio-->
     <div class="footer">
-      <p>Feito por João Assis &hearts; SPTech &copy; 2024 | <span class="version">v1.0.0</span></p>
+      <p>
+        Feito por João Assis &hearts; SPTech &copy; 2024 |
+        <span class="version">v1.0.0</span>
+      </p>
       <div class="icones_redes">
-          <div class="linkdin">
-              <a href="https://www.linkedin.com/in/jodro-assis/" target="_blank"><img src="./assets/imgs/linkedin.png" width="20px"></a>
-          </div>
-          <div class="github">
-              <a href="https://github.com/jodroassis" target="_blank"><img src="./assets/imgs/github.png" width="20px"></a>
-          </div>
+        <div class="linkdin">
+          <a href="https://www.linkedin.com/in/jodro-assis/" target="_blank"
+            ><img src="./assets/imgs/linkedin.png" width="20px"
+          /></a>
+        </div>
+        <div class="github">
+          <a href="https://github.com/jodroassis" target="_blank"
+            ><img src="./assets/imgs/github.png" width="20px"
+          /></a>
+        </div>
       </div>
     </div>
     <!--footer fim-->
@@ -123,31 +134,32 @@
 
 <script>
   // Array para armazenar empresas cadastradas para validação de código de ativação
-  // let listaEmpresasCadastradas = [];
+  let listaEmpresasCadastradas = [];
 
   function cadastrar() {
-    // aguardar();
+    aguardar();
 
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
     var nomeVar = nome_input.value;
     var emailVar = email_input.value;
+    var dtNascVar = dtNasc_input.value;
     var cpfVar = cpf_input.value;
     var senhaVar = senha_input.value;
     var confirmacaoSenhaVar = confirmacao_senha_input.value;
-    // var codigoVar = codigo_input.value;
+    var codigoVar = codigo_input.value;
     var idEmpresaVincular;
 
-    var emailArroba = emailVar.includes('@');
-    var emailPonto = emailVar.includes('.');
+    var emailArroba = emailVar.includes("@");
+    var emailPonto = emailVar.includes(".");
 
     //verificar erro no cadastro
     if (nomeVar.length < 2) {
       div_erro_nome.innerHTML = `<spam style="color: red">Nome pequeno. Minímo 2 letras.</spam>`;
-    } 
+    }
     if (senhaVar.length < 7) {
       div_erro_senha_tam.innerHTML = `<spam style="color: red">Senha fraca. Minímo 7 caractéres</spam>`;
-    } 
+    }
     if (senhaVar != confirmacaoSenhaVar) {
       div_erro_senha_conf.innerHTML = `<spam style="color: red">Senhas devem ser iguais.</spam>`;
     }
@@ -161,10 +173,10 @@
     //apagar a mensagem caso esteja certo
     if (nomeVar.length > 1) {
       div_erro_nome.innerHTML = ``;
-    } 
+    }
     if (senhaVar.length > 6) {
       div_erro_senha_tam.innerHTML = ``;
-    } 
+    }
     if (senhaVar == confirmacaoSenhaVar) {
       div_erro_senha_conf.innerHTML = ``;
     }
@@ -194,7 +206,7 @@
       setInterval(sumirMensagem, 5000);
     }
 
-    /* Verificando se o código de ativação é de alguma empresa cadastrada
+    /* Verificando se o código de ativação é de alguma empresa cadastrada */
     for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
       if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
         idEmpresaVincular = listaEmpresasCadastradas[i].id;
@@ -205,7 +217,7 @@
         mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
         finalizarAguardar();
       }
-    } */
+    }
 
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
@@ -218,6 +230,7 @@
         // Agora vá para o arquivo routes/usuario.js
         nomeServer: nomeVar,
         emailServer: emailVar,
+        dtNascServer: dtNascVar,
         cpfServer: cpfVar,
         senhaServer: senhaVar,
         confirmacaoSenhaServer: confirmacaoSenhaVar,
@@ -251,7 +264,7 @@
     return false;
   }
 
-  /* Listando empresas cadastradas
+  /* Listando empresas cadastradas */
   function listar() {
     fetch("/empresas/listar", {
       method: "GET",
@@ -269,7 +282,7 @@
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
       });
-  } */
+  }
 
   function sumirMensagem() {
     cardErro.style.display = "none";

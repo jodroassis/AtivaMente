@@ -26,6 +26,7 @@ function autenticar(req, res) {
                                     res.json({
                                         id: resultadoAutenticar[0].id,
                                         email: resultadoAutenticar[0].email,
+                                        dtNasc: resultadoAutenticar[0].dtNasc,
                                         cpf : resultadoAutenticar[0].cpf,
                                         nome: resultadoAutenticar[0].nome,
                                         senha: resultadoAutenticar[0].senha,
@@ -56,9 +57,9 @@ function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nome = req.body.nomeServer;
     var email = req.body.emailServer;
+    var dtNasc = req.body.dtNascServer;
     var cpf = req.body.cpfServer;
     var senha = req.body.senhaServer;
-    var confirmacaoSenha = req.body.confirmacaoSenhaServer;
     var fkEmpresa = req.body.idEmpresaVincularServer;
 
     // Faça as validações dos valores
@@ -74,7 +75,7 @@ function cadastrar(req, res) {
         res.status(400).send("Seu CPF está undefined!");
     } else {
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, email, cpf, senha, fkEmpresa)
+        usuarioModel.cadastrar(nome, email, dtNasc, cpf, senha, fkEmpresa)
             .then(
                 function (resultado) {
                     res.json(resultado);
