@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AquaTech | Página Inicial</title>
+
+    <script src="./js/sessao.js"></script>
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="icon" href="./assets/icon/favicon2.ico">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
+
+<body>
+  <div class="header">
+    <div class="container">
+      <div class="logo">
+        <h1>AtivaMente</h1>
+      </div>
+      <nav class="menu">
+        <ul class="navbar">
+          <li><a href="#" class="agora">Inicial</a></li>
+          <li><a href="pesquisa.html" class="pesquisa">Pesquisa</a></li>
+          <li><a href="sobre.html" class="sobre">Sobre o Projeto</a></li>
+          <li>|</li>
+          <li><a href="login.html" class="botao-login">Login</a></li>
+          <li><a href="cadastro.html" class="botao-cadastro">Cadastro</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  
+  <div class="banner">
+    <img src="./assets/imgs/banner.jpg" alt="Nadador" />
+    <div class="banner-texto">
+      <p>Transforme seu <span>corpo</span> e eleve sua <span>mente</span></p>
+    </div>
+  </div>
+  
+    <!-- Filtros e Busca -->
+    <div class="container-filtro">
+      <select class="slt_filtro">
+        <option value="recentes">Mais Recentes</option>
+        <option value="populares">Mais Populares</option>
+        <option value="curtidos">Mais Curtidos</option>
+      </select>
+      <input
+        type="text"
+        class="input_pesquisa"
+        placeholder="Pesquisar artigos por Título"
+      />
+    </div>
+
+    <!-- Cards de Artigos -->
+    <div class="cards-artigos">
+      <div class="card">
+        <img src="./assets/imgs/sport-svgrepo-com.svg" />
+        <div class="card-conteudo">
+          <h2 class="card-titulo">
+            A Sombra dos Esportes: Para Além da Saúde Física e Lazer
+          </h2>
+          <p class="card-autor">por João Assis | 20 Nov 2024</p>
+          <p class="card-descricao">
+            A prática de esportes no Brasil ainda enfrenta desafios para o seu desenvolvimento, tanto nas escolas quanto na sociedade em geral...
+          </p>
+          <div class="card-curtida-vizualizacao">
+            <div class="card-curtida">
+              <img src="./assets/imgs/curtida.png" alt="Curtidas" />
+              <span>123 curtidas</span>
+            </div>
+            <div class="card-vizualizacao">
+              <img
+                src="./assets/imgs/view-simple-815-svgrepo-com.svg"
+                alt="Views"
+              />
+              <span>1.000 views</span>
+            </div>
+          </div>
+          <a href="artigo1.html" class="leia" onclick="vizualizar3()">Leia mais</a>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <img src="./assets/imgs/brain-svgrepo-com.svg" />
+        <div class="card-conteudo">
+          <h2 class="card-titulo">Como o Esporte Ajuda na Saúde Mental</h2>
+          <p class="card-autor">por Maria Silva | 18 Nov 2024</p>
+          <p class="card-descricao">
+            Descubra os benefícios do esporte no combate ao estresse e na
+            melhora da saúde mental...
+          </p>
+          <div class="card-curtida-vizualizacao">
+            <div class="card-curtida">
+              <img src="./assets/imgs/curtida.png" alt="Curtidas" />
+              <span>520 curtidas</span>
+            </div>
+            <div class="card-vizualizacao">
+              <img
+                src="./assets/imgs/view-simple-815-svgrepo-com.svg"
+                alt="Views"
+              />
+              <span>1.617 views</span>
+            </div>
+          </div>
+          <a href="artigo2.html" class="leia" onclick="vizualizar2()">Leia mais</a>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <img src="./assets/imgs/avatar-child-girl-svgrepo-com.svg" />
+        <div class="card-conteudo">
+          <h2 class="card-titulo">
+            Esportes para Crianças: Benefícios e Dicas
+          </h2>
+          <p class="card-autor">por Carlos Souza | 15 Nov 2024</p>
+          <p class="card-descricao">
+            Entenda como os esportes auxiliam no desenvolvimento das crianças e
+            como incentivá-las...
+          </p>
+          <div class="card-curtida-vizualizacao">
+            <div class="card-curtida">
+              <img src="./assets/imgs/curtida.png" alt="Curtidas" />
+              <span>714 curtidas</span>
+            </div>
+            <div class="card-vizualizacao">
+              <img
+                src="./assets/imgs/view-simple-815-svgrepo-com.svg"
+                alt="Views"
+              />
+              <span>863 views</span>
+            </div>
+          </div>
+          <a href="artigo3.html" class="leia" onclick="vizualizar3()">Leia mais</a>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card">
+        <img src="./assets/imgs/the-ball-svgrepo-com.svg" />
+        <div class="card-conteudo">
+          <h2 class="card-titulo">
+            Práticas Esportivas para uma Vida Saudável
+          </h2>
+          <p class="card-autor">por Ana Paula | 10 Nov 2024</p>
+          <p class="card-descricao">
+            Veja como a prática regular de esportes pode transformar sua
+            qualidade de vida...
+          </p>
+          <div class="card-curtida-vizualizacao">
+            <div class="card-curtida">
+              <img src="./assets/imgs/curtida.png" alt="Curtidas" />
+              <span>217 curtidas</span>
+            </div>
+            <div class="card-vizualizacao">
+              <img
+                src="./assets/imgs/view-simple-815-svgrepo-com.svg"
+                alt="Views"
+              />
+              <span>153 views</span>
+            </div>
+          </div>
+          <a href="artigo4.html" class="leia" onclick="vizualizar4()">Leia mais</a>
+        </div>
+      </div>
+    </div>
+  
+    <div class="footer">
+      <p>Feito por João Assis &hearts; SPTech &copy; 2024 | <span class="version">v1.0.0</span></p>
+      <div class="icones_redes">
+          <div class="linkdin">
+              <a href="https://www.linkedin.com/in/jodro-assis/" target="_blank"><img src="./assets/imgs/linkedin.png" width="20px"></a>
+          </div>
+          <div class="github">
+              <a href="https://github.com/jodroassis" target="_blank"><img src="./assets/imgs/github.png" width="20px"></a>
+          </div>
+      </div>
+    </div>
+  </body>
+
+</html>
