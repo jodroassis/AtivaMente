@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AtivaMente | Artigo</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <div class="header">
@@ -32,7 +32,7 @@
             <h1>A Sombra dos Esportes: Para Além da Saúde Física e Lazer</h1>
             <h2>Resumo do artigo</h2>
             <p>A prática do esporte no Brasil ainda enfrenta muitos obstáculos no desenvolvimento, tanto na escola quanto na sociedade em geral. Embora quase todos aceitem que a atividade física promove a saúde, a sua importância no desenvolvimento de competências sociais, emocionais e cognitivas é geralmente subvalorizada ou pouco reconhecida. O artigo tenta sensibilizar para a importância do desporto, não só como meio de promoção da saúde física, mas também como forma eficaz de desenvolver competências cruciais como liderança, comunicação, trabalho em equipa e resiliência, entre outras. Forma e contribui muito para a integração social e o crescimento pessoal, desempenhando papel fundamental no desenvolvimento humano.</p>
-            <img src="./assets/imgs/banner_corpo.jpg" width="50%">
+            <img src="../assets/imgs/banner_corpo.jpg" width="50%">
 
             
             <h2>Introdução</h2>
@@ -83,7 +83,7 @@
     <!-- Seção de Curtidas -->
     <div class="container-curtida">
         <button onclick="curtir()" class="botao-curtida">
-            <img src="./assets/imgs/curtida.png">
+            <img src="../assets/imgs/curtida.png">
             Curtir
         </button>
         <span id="span_curtida">123 curtidas</span>
@@ -95,21 +95,12 @@
     <p>Feito por João Assis &hearts; SPTech &copy; 2024 | <span class="version">v1.0.0</span></p>
     <div class="icones_redes">
         <div class="linkdin">
-            <a href="https://www.linkedin.com/in/jodro-assis/" target="_blank"><img src="./assets/imgs/linkedin.png" width="20px"></a>
+            <a href="https://www.linkedin.com/in/jodro-assis/" target="_blank"><img src="../assets/imgs/linkedin.png" width="20px"></a>
         </div>
         <div class="github">
-            <a href="https://github.com/jodroassis" target="_blank"><img src="./assets/imgs/github.png" width="20px"></a>
+            <a href="https://github.com/jodroassis" target="_blank"><img src="../assets/imgs/github.png" width="20px"></a>
         </div>
     </div>
   </div>
 </body>
 </html>
-
-<script>
-    // Função para incrementar as curtidas
-    var curtida =123;
-    function curtir() {
-        curtida++;
-        document.getElementById('span_curtida').textContent = `${curtida} curtidas`;
-    }
-</script>

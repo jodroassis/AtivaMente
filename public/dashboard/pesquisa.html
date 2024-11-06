@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AtivaMente | Pesquisa</title>
+    <script src="../js/sessao.js"></script>
+    <script src="../js/alerta.js"></script>
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/dashboards.css">
+</head>
+<body onload="validarSessao(), atualizacaoPeriodica()">
+    <div class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>AtivaMente</h1>
+            </div>
+            <nav class="menu">
+                <ul class="navbar">
+                    <li><a href="home.html" class="artigo">Artigo</a></li>
+                    <li><a href="#" class="agora">Pesquisa</a></li>
+                    <li><a href="sobre.html" class="sobre">Sobre o Projeto</a></li>
+                    <li>|</li>
+                    <div class="usuario-logado">
+                        <div class="hello">
+                          <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+                          <span id="mostrar_cpf"></span>
+                        </div>
+                        <div class="btn-logout" onclick="limparSessao()">
+                          <h3>Sair</h3>
+                        </div>
+                      </div>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="survey">
+        <div class="container">
+          <h2>Compartilhe seus hábitos e metas de bem-estar!</h2>
+          <p>Queremos entender como você cuida da sua saúde e quais são seus objetivos de bem-estar. Com suas respostas, poderemos trazer conteúdos mais alinhados aos seus interesses.</p>
+    
+          <form id="surveyForm">
+            
+            <!-- Idade -->
+            <div class="campo">
+              <label for="idade">Qual a sua idade?</label>
+              <input type="number" id="idade" name="idade" min="10" max="100" required>
+            </div>
+    
+            <!-- Frequência de Atividade Física -->
+            <div class="campo">
+              <label for="atividade-fisica">Com que frequência você pratica atividade física?</label>
+              <select id="atividade-fisica" name="atividade-fisica" required>
+                <option value="diariamente">Diariamente</option>
+                <option value="semanalmente">1 a 3 vezes por semana</option>
+                <option value="ocasionalmente">Ocasionalmente</option>
+                <option value="raramente">Raramente</option>
+                <option value="nunca">Nunca</option>
+              </select>
+            </div>
+    
+            <!-- Alimentação -->
+            <div class="campo">
+              <label for="alimentacao">Como você descreveria sua alimentação?</label>
+              <select id="alimentacao" name="alimentacao" required>
+                <option value="balanceada">Balanceada (frutas, legumes, proteínas)</option>
+                <option value="regular">Regular (alguns alimentos saudáveis, mas com indulgências)</option>
+                <option value="desregrada">Desregrada (poucos alimentos saudáveis)</option>
+                <option value="vegetariana">Vegetariana/Vegana</option>
+              </select>
+            </div>
+    
+            <!-- Sono -->
+            <div class="campo">
+              <label for="sono">Quantas horas você costuma dormir por noite?</label>
+              <input type="number" id="sono" name="sono" min="1" max="12" required>
+            </div>
+    
+            <!-- Saúde Mental -->
+            <div class="campo">
+              <label for="saude-mental">Como você descreveria sua saúde mental atualmente?</label>
+              <select id="saude-mental" name="saude-mental" required>
+                <option value="excelente">Excelente</option>
+                <option value="boa">Boa</option>
+                <option value="regular">Regular</option>
+                <option value="fraca">Fraca</option>
+                <option value="preciso-de-ajuda">Preciso de ajuda</option>
+              </select>
+            </div>
+    
+            <!-- Objetivos de Saúde -->
+            <div class="campo">
+              <label for="objetivos-saude">Quais são os seus principais objetivos de saúde?</label>
+              <select id="objetivos-saude" name="objetivos-saude" multiple required>
+                <option value="emagrecimento">Emagrecimento</option>
+                <option value="ganho-massa">Ganho de massa muscular</option>
+                <option value="melhorar-condicao">Melhorar a condição física</option>
+                <option value="bem-estar-mental">Bem-estar mental</option>
+                <option value="melhorar-alimentacao">Melhorar alimentação</option>
+                <option value="outros">Outros</option>
+              </select>
+            </div>
+    
+            <!-- Nível de Estresse -->
+            <div class="campo">
+              <label for="nivel-estresse">Como você classificaria seu nível de estresse?</label>
+              <select id="nivel-estresse" name="nivel-estresse" required>
+                <option value="baixo">Baixo</option>
+                <option value="moderado">Moderado</option>
+                <option value="alto">Alto</option>
+                <option value="muito-alto">Muito alto</option>
+              </select>
+            </div>
+    
+            <!-- Feedback sobre Conteúdos -->
+            <div class="campo">
+              <label for="feedback-conteudos">Quais tipos de conteúdo gostaria de ver sobre vida saudável?</label>
+              <textarea id="feedback-conteudos" name="feedback-conteudos" rows="4"></textarea>
+            </div>
+    
+            <!-- Botão de Envio -->
+            <button type="submit" class="btn">Enviar Respostas</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>Feito por João Assis &hearts; SPTech &copy; 2024 | <span class="version">v1.0.0</span></p>
+        <div class="icones_redes">
+            <div class="linkdin">
+                <a href="https://www.linkedin.com/in/jodro-assis/" target="_blank"><img src="../assets/imgs/linkedin.png" width="20px"></a>
+            </div>
+            <div class="github">
+                <a href="https://github.com/jodroassis" target="_blank"><img src="../assets/imgs/github.png" width="20px"></a>
+            </div>
+        </div>
+      </div>
+</body>
+</html>

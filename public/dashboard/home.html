@@ -1,46 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>AquaTech | Página Inicial</title>
 
-    <script src="./js/sessao.js"></script>
+    <script src="../js/sessao.js"></script>
+    <script src="../js/alerta.js"></script>
 
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="icon" href="./assets/icon/favicon2.ico">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-</head>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/dashboards.css" />
+    <link rel="icon" href="./assets/icon/favicon2.ico" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+  </head>
 
-<body>
-  <div class="header">
-    <div class="container">
-      <div class="logo">
-        <h1>AtivaMente</h1>
+  <body onload="validarSessao(), atualizacaoPeriodica()">
+    <div class="header">
+      <div class="container">
+        <div class="logo">
+          <h1>AtivaMente</h1>
+        </div>
+        <nav class="menu">
+          <ul class="navbar">
+            <li><a href="#" class="agora">Inicial</a></li>
+            <li><a href="pesquisa.html" class="pesquisa">Pesquisa</a></li>
+            <li><a href="dashboard.html" class="dashboard">Dashboard</a></li>
+            <li><a href="sobre.html" class="sobre">Sobre o Projeto</a></li>
+            <li>|</li>
+            <div class="usuario-logado">
+              <div class="hello">
+                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+                <span id="mostrar_cpf"></span>
+              </div>
+              <div class="btn-logout" onclick="limparSessao()">
+                <h3>Sair</h3>
+              </div>
+            </div>
+          </ul>
+        </nav>
       </div>
-      <nav class="menu">
-        <ul class="navbar">
-          <li><a href="#" class="agora">Inicial</a></li>
-          <li><a href="pesquisa.html" class="pesquisa">Pesquisa</a></li>
-          <li><a href="sobre.html" class="sobre">Sobre o Projeto</a></li>
-          <li>|</li>
-          <li><a href="login.html" class="botao-login">Login</a></li>
-          <li><a href="cadastro.html" class="botao-cadastro">Cadastro</a></li>
-        </ul>
-      </nav>
     </div>
-  </div>
-  
-  <div class="banner">
-    <img src="./assets/imgs/banner.jpg" alt="Nadador" />
-    <div class="banner-texto">
-      <p>Transforme seu <span>corpo</span> e eleve sua <span>mente</span></p>
+
+    <div class="banner">
+      <img src="../assets/imgs/banner.jpg" alt="Nadador" />
+      <div class="banner-texto">
+        <p>Transforme seu <span>corpo</span> e eleve sua <span>mente</span></p>
+      </div>
     </div>
-  </div>
-  
+
     <!-- Filtros e Busca -->
     <div class="container-filtro">
       <select class="slt_filtro">
@@ -58,35 +67,38 @@
     <!-- Cards de Artigos -->
     <div class="cards-artigos">
       <div class="card">
-        <img src="./assets/imgs/sport-svgrepo-com.svg" />
+        <img src="../assets/imgs/sport-svgrepo-com.svg" />
         <div class="card-conteudo">
           <h2 class="card-titulo">
             A Sombra dos Esportes: Para Além da Saúde Física e Lazer
           </h2>
           <p class="card-autor">por João Assis | 20 Nov 2024</p>
           <p class="card-descricao">
-            A prática de esportes no Brasil ainda enfrenta desafios para o seu desenvolvimento, tanto nas escolas quanto na sociedade em geral...
+            A prática de esportes no Brasil ainda enfrenta desafios para o seu
+            desenvolvimento, tanto nas escolas quanto na sociedade em geral...
           </p>
           <div class="card-curtida-vizualizacao">
             <div class="card-curtida">
-              <img src="./assets/imgs/curtida.png" alt="Curtidas" />
+              <img src="../assets/imgs/curtida.png" alt="Curtidas" />
               <span>123 curtidas</span>
             </div>
             <div class="card-vizualizacao">
               <img
-                src="./assets/imgs/view-simple-815-svgrepo-com.svg"
+                src="../assets/imgs/view-simple-815-svgrepo-com.svg"
                 alt="Views"
               />
               <span>1.000 views</span>
             </div>
           </div>
-          <a href="artigo.html" class="leia" onclick="vizualizar1()">Leia mais</a>
+          <a href="./artigo.html" class="leia" onclick="vizualizar1()"
+            >Leia mais</a
+          >
         </div>
       </div>
 
       <!-- Card 2 -->
       <div class="card">
-        <img src="./assets/imgs/brain-svgrepo-com.svg" />
+        <img src="../assets/imgs/brain-svgrepo-com.svg" />
         <div class="card-conteudo">
           <h2 class="card-titulo">Como o Esporte Ajuda na Saúde Mental</h2>
           <p class="card-autor">por Maria Silva | 18 Nov 2024</p>
@@ -96,24 +108,26 @@
           </p>
           <div class="card-curtida-vizualizacao">
             <div class="card-curtida">
-              <img src="./assets/imgs/curtida.png" alt="Curtidas" />
+              <img src="../assets/imgs/curtida.png" alt="Curtidas" />
               <span>520 curtidas</span>
             </div>
             <div class="card-vizualizacao">
               <img
-                src="./assets/imgs/view-simple-815-svgrepo-com.svg"
+                src="../assets/imgs/view-simple-815-svgrepo-com.svg"
                 alt="Views"
               />
               <span>1.617 views</span>
             </div>
           </div>
-          <a href="artigo2.html" class="leia" onclick="vizualizar2()">Leia mais</a>
+          <a href="artigo2.html" class="leia" onclick="vizualizar2()"
+            >Leia mais</a
+          >
         </div>
       </div>
 
       <!-- Card 3 -->
       <div class="card">
-        <img src="./assets/imgs/avatar-child-girl-svgrepo-com.svg" />
+        <img src="../assets/imgs/avatar-child-girl-svgrepo-com.svg" />
         <div class="card-conteudo">
           <h2 class="card-titulo">
             Esportes para Crianças: Benefícios e Dicas
@@ -125,24 +139,26 @@
           </p>
           <div class="card-curtida-vizualizacao">
             <div class="card-curtida">
-              <img src="./assets/imgs/curtida.png" alt="Curtidas" />
+              <img src="../assets/imgs/curtida.png" alt="Curtidas" />
               <span>714 curtidas</span>
             </div>
             <div class="card-vizualizacao">
               <img
-                src="./assets/imgs/view-simple-815-svgrepo-com.svg"
+                src="../assets/imgs/view-simple-815-svgrepo-com.svg"
                 alt="Views"
               />
               <span>863 views</span>
             </div>
           </div>
-          <a href="artigo3.html" class="leia" onclick="vizualizar3()">Leia mais</a>
+          <a href="artigo3.html" class="leia" onclick="vizualizar3()"
+            >Leia mais</a
+          >
         </div>
       </div>
 
       <!-- Card 4 -->
       <div class="card">
-        <img src="./assets/imgs/the-ball-svgrepo-com.svg" />
+        <img src="../assets/imgs/the-ball-svgrepo-com.svg" />
         <div class="card-conteudo">
           <h2 class="card-titulo">
             Práticas Esportivas para uma Vida Saudável
@@ -154,33 +170,41 @@
           </p>
           <div class="card-curtida-vizualizacao">
             <div class="card-curtida">
-              <img src="./assets/imgs/curtida.png" alt="Curtidas" />
+              <img src="../assets/imgs/curtida.png" alt="Curtidas" />
               <span>217 curtidas</span>
             </div>
             <div class="card-vizualizacao">
               <img
-                src="./assets/imgs/view-simple-815-svgrepo-com.svg"
+                src="../assets/imgs/view-simple-815-svgrepo-com.svg"
                 alt="Views"
               />
               <span>153 views</span>
             </div>
           </div>
-          <a href="artigo4.html" class="leia" onclick="vizualizar4()">Leia mais</a>
+          <a href="artigo4.html" class="leia" onclick="vizualizar4()"
+            >Leia mais</a
+          >
         </div>
       </div>
     </div>
-  
+
     <div class="footer">
-      <p>Feito por João Assis &hearts; SPTech &copy; 2024 | <span class="version">v1.0.0</span></p>
+      <p>
+        Feito por João Assis &hearts; SPTech &copy; 2024 |
+        <span class="version">v1.0.0</span>
+      </p>
       <div class="icones_redes">
-          <div class="linkdin">
-              <a href="https://www.linkedin.com/in/jodro-assis/" target="_blank"><img src="./assets/imgs/linkedin.png" width="20px"></a>
-          </div>
-          <div class="github">
-              <a href="https://github.com/jodroassis" target="_blank"><img src="./assets/imgs/github.png" width="20px"></a>
-          </div>
+        <div class="linkdin">
+          <a href="https://www.linkedin.com/in/jodro-assis/" target="_blank"
+            ><img src="../assets/imgs/linkedin.png" width="20px"
+          /></a>
+        </div>
+        <div class="github">
+          <a href="https://github.com/jodroassis" target="_blank"
+            ><img src="../assets/imgs/github.png" width="20px"
+          /></a>
+        </div>
       </div>
     </div>
   </body>
-
 </html>

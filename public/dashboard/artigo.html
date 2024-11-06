@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AtivaMente | Artigo</title>
+    <script src="../js/sessao.js"></script>
+    <script src="../js/alerta.js"></script>
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/dashboards.css">
+</head>
+<body onload="validarSessao(); atualizarComentarios();">
+    <div class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>AtivaMente</h1>
+            </div>
+            <nav class="menu">
+                <ul class="navbar">
+                    <li><a href="home.html" class="inicial">Inicial</a></li>
+                    <li><a href="pesquisa.html">Pesquisa</a></li>
+                    <li><a href="sobre.html" class="sobre">Sobre o Projeto</a></li>
+                    <li>|</li>
+                    <div class="usuario-logado">
+                        <div class="hello">
+                          <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+                          <span id="mostrar_cpf"></span>
+                        </div>
+                        <div class="btn-logout" onclick="limparSessao()">
+                          <h3>Sair</h3>
+                        </div>
+                      </div>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    
+
+    <div class="content">
+        <div class="artigo">
+            <h1>A Sombra dos Esportes: Para Além da Saúde Física e Lazer</h1>
+            <h2>Resumo do artigo</h2>
+            <p>A prática do esporte no Brasil ainda enfrenta muitos obstáculos no desenvolvimento, tanto na escola quanto na sociedade em geral. Embora quase todos aceitem que a atividade física promove a saúde, a sua importância no desenvolvimento de competências sociais, emocionais e cognitivas é geralmente subvalorizada ou pouco reconhecida. O artigo tenta sensibilizar para a importância do desporto, não só como meio de promoção da saúde física, mas também como forma eficaz de desenvolver competências cruciais como liderança, comunicação, trabalho em equipa e resiliência, entre outras. Forma e contribui muito para a integração social e o crescimento pessoal, desempenhando papel fundamental no desenvolvimento humano.</p>
+            <img src="../assets/imgs/banner_corpo.jpg" width="50%">
+
+            
+            <h2>Introdução</h2>
+            <p>As atividades físicas no Brasil ainda aguardam mais divulgação nas escolas e na sociedade. Um exemplo é o SESI - Serviço Social da Indústria - que informa que 39% dos brasileiros não praticam nenhum tipo de atividade física regularmente, e outros 13% raramente o fazem, somando 52% dos que não praticam. aproveitar os benefícios que o esporte pode oferecer. Estes dados mostram que há necessidade de maior promoção das práticas desportivas.
+
+            Os problemas que impedem o acesso ao desporto são variados: falta de tempo, desinteresse, rotinas desgastantes, deterioração das condições de trabalho e falta de espaço público adequado. Apesar disso, o percentual de brasileiros que praticam alguma forma de atividade física passou de 30,3%, em 2009, para 36,7% em 2021, o que representa um aumento importante, mas ainda insuficiente.</p>
+
+            <h2>O Esporte e a sua Importância no Desenvolvimento Humano</h2>
+            <p>O desporto é mais do que uma atividade física: faz parte de uma abordagem cognitiva à aprendizagem e ao desenvolvimento emocional e social. A competição desportiva permite melhorar competências como superar obstáculos, tomar decisões num espaço de tempo bastante curto e trabalhar a alta velocidade. Além disso, o desporto permite o desenvolvimento de uma série de competências úteis em muitos outros aspectos da vida quotidiana.</p>
+            
+            <h3>Benefícios Físicos e Psicológicos</h3>
+            <p>Os exercícios regulares no âmbito das atividades desportivas apresentam uma série de vantagens físicas que incluem a melhoria da atividade cardiovascular, o fortalecimento dos músculos e o aumento da flexibilidade, diminuindo o risco de desenvolvimento de doenças crónicas. Porém, os benefícios psicológicos não são menos importantes porque a atividade física provoca a secreção de endorfinas – substâncias capazes de reduzir o estresse e a ansiedade em até 25%. Além disso, o desporto desenvolve a resiliência e a autodisciplina necessárias para superar as adversidades do quotidiano.</p>
+
+            <h3>Habilidades Sociais e Comportamentais</h3>
+            <p>Habilidades sociais e comportamentais Esportes coletivos como futebol, basquete e vôlei desenvolvem habilidades sociais em um indivíduo, incluindo trabalho em equipe e comunicação. Esses esportes coletivos incentivam os jogadores a trabalharem juntos com um propósito e a construírem um senso de coesão. Está registado que a capacidade de cooperação aumenta até 20% através do envolvimento em desportos colectivos. Outras competências sociais importantes desenvolvidas no desporto são o respeito pelas regras e a valorização da diversidade.</p>
+
+            <h3>Inclusão Social e Liderança</h3>
+            <p>Outra forma de sucesso é a utilização do desporto para a inclusão social, onde as lacunas culturais, sociais e económicas são colmatadas. Os desportos comunitários têm numerosos projetos que apoiam a inclusão; por exemplo, a inclusão de pessoas em regiões precárias aumenta 25%. Além disso, envolve atividades por meio das quais as habilidades de liderança podem ser capacitadas para que os participantes também incluam a responsabilidade de se tornarem um exemplo em sua comunidade. A pesquisa registrou que através do esporte, as habilidades de liderança podem ser aumentadas em até 18%.</strong></p>
+            
+            <h2>Considerações Finais</h2>
+            <p>O esporte é uma preocupação de desenvolvimento humano integral e deve ser tratado como uma ferramenta multidimensional. Além de promover a saúde física, a prática de esporte contribui para uma sociedade inclusiva e solidária. O crescimento do esporte praticado no Brasil é um bom indicador, mas ainda há muito a ser feito para que seus benefícios cheguem a todos os cidadãos. Deveria estar em debate em todas as políticas públicas relativas à educação e à saúde, tendo em consideração o pleno desenvolvimento de uma geração futura.</p>
+            
+            <div class="referencias">
+                <h3>Referências</h3>
+                <ul>
+                    <li><a href="https://paahjournal.com/articles/10.5334/paah.108" target="_blank">Journal of Physical Activity and Health. "The Impact of Physical Activity on Mental Health: A Comprehensive Review" (2021).</a><i></i></li>
+                    <li><a href="https://www.rn.sesi.org.br/52-nao-praticam-atividade-fisica-regularmente-diz-pesquisa-sesi/" target="_blank">SESI. "Relatório sobre Atividade Física no Brasil." (2021).</a><i></i></li>
+                    <li><a href="https://www.gov.br/saude/pt-br/assuntos/noticias/2022/agosto/ministerio-da-saude-lanca-publicacao-sobre-indicadores-de-pratica-de-atividades-fisicas-entre-os-brasileiros" target="_blank">Instituto Brasileiro de Geografia e Estatística (IBGE). "Prática de Atividade Física no Brasil: Um Panorama Atual." (2021).</a><i></i></li>
+                    <li><a href="https://repositorio.unifesp.br/items/8c312308-1ce8-4312-8441-a962c223ea07/full" target="_blank">Universidade Federal de São Paulo (UNIFESP). "O esporte como ferramenta de inclusão e transformação social: o serviço de convivência e fortalecimento de vínculos e sua importância enquanto rede de apoio" (2023).</a><i></i></li>
+                </ul>
+            </div>
+
+            <hr>
+
+            <div class="autor">
+                <div class="autor-foto"></div>
+                <div class="autor-info">
+                    <h2>por <span>João Assis</span></h2>
+                    <p>Publicado em 20 de novembro de 2024</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <hr>
+
+    <!-- Seção de Curtidas -->
+    <div class="container-curtida">
+        <button onclick="curtir()" class="botao-curtida">
+            <img src="../assets/imgs/curtida.png">
+            Curtir
+        </button>
+        <span id="span_curtida">123 curtidas</span>
+    </div>
+
+    <div class="avisos">
+        <div id="alerta"></div>
+        <div class="container">
+            <h1>Deixe um comentário</h1>
+            <div class="div-form">
+                <form id="form_comentario" method="post" onsubmit="return publicarComentario()">
+                    <label>
+                        Nome:
+                        <br>
+                        <input name="nome" id="nome" maxlength="50" type="text" required>
+                    </label>
+                    <br><br>
+                    <label>
+                        Comentário (máximo de 250 caracteres):
+                        <br>
+                        <textarea name="comentario" id="textarea_comentario" maxlength="250" rows="5" required></textarea>
+                    </label>
+                    <br><br>
+                    <button type="submit">Enviar Comentário</button>
+                </form>
+            </div>
+            <h1>Comentários</h1>
+            <div class="div-results">
+                <div id="comentarios_container" class="comentarios-container"></div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+</div>
+
+    <div class="footer">
+        <p>Feito por João Assis &hearts; SPTech &copy; 2024 | <span class="version">v1.0.0</span></p>
+        <div class="icones_redes">
+            <div class="linkdin">
+                <a href="https://www.linkedin.com/in/jodro-assis/" target="_blank"><img src="../assets/imgs/linkedin.png" width="20px"></a>
+            </div>
+            <div class="github">
+                <a href="https://github.com/jodroassis" target="_blank"><img src="../assets/imgs/github.png" width="20px"></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    // Função para incrementar as curtidas
+    var curtida =123;
+    function curtir() {
+        curtida++;
+        document.getElementById('span_curtida').textContent = `${curtida} curtidas`;
+    }
+
+    function publicarComentario() {
+    var idUsuario = sessionStorage.ID_USUARIO;
+    var corpo = {
+        nome: form_comentario.nome.value,
+        comentario: form_comentario.comentario.value
+    };
+
+    fetch(`/comentarios/publicar/${idUsuario}`, {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(corpo)
+    }).then(function (resposta) {
+        if (resposta.ok) {
+            alert("Comentário publicado com sucesso!");
+            limparFormularioComentario();
+            atualizarComentarios();
+        } else if (resposta.status === 404) {
+            alert("Erro 404: Comentário não encontrado.");
+        } else {
+            throw new Error("Erro ao publicar comentário! Código: " + resposta.status);
+        }
+    }).catch(function (error) {
+        console.error("Erro:", error);
+    });
+
+    return false;
+}
+
+function limparFormularioComentario() {
+    document.getElementById("form_comentario").reset();
+}
+
+function atualizarComentarios() {
+    fetch("/comentarios/listar").then(function (resposta) {
+        if (resposta.ok) {
+            resposta.json().then(function (dados) {
+                var comentariosContainer = document.getElementById("comentarios_container");
+                comentariosContainer.innerHTML = ""; // Limpar comentários anteriores
+
+                dados.forEach(function (comentario) {
+                    var divComentario = document.createElement("div");
+                    divComentario.className = "comentario";
+
+                    var spanNome = document.createElement("span");
+                    spanNome.className = "comentario-nome";
+                    spanNome.innerHTML = `<b>${comentario.nome}</b> comentou:`;
+
+                    var divTexto = document.createElement("div");
+                    divTexto.className = "comentario-texto";
+                    divTexto.innerHTML = comentario.comentario;
+
+                    divComentario.appendChild(spanNome);
+                    divComentario.appendChild(divTexto);
+
+                    comentariosContainer.appendChild(divComentario);
+                });
+            });
+        } else {
+            throw new Error("Erro ao carregar comentários!");
+        }
+    }).catch(function (error) {
+        console.error("Erro:", error);
+    });
+}
+
+</script>

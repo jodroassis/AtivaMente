@@ -117,9 +117,9 @@ function transformarEmDiv({ idAquario, temp, grauDeAviso, grauDeAvisoCor }) {
     `;
 }
 
-function atualizacaoPeriodica() {
-    JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
-        obterdados(item.id)
-    });
-    setTimeout(atualizacaoPeriodica, 5000);
-}
+// function atualizacaoPeriodica() {
+//    JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
+//        obterdados(item.id)
+//    });
+//    setTimeout(atualizacaoPeriodica, 5000);
+//}

@@ -45,6 +45,7 @@ body {
     height: var(--tamanho-header);
 }
 
+
 .header .container {
     display: flex;
     justify-content: space-between;
@@ -81,10 +82,24 @@ body {
     font-size: 20px;
 }
 
+.header .navbar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 600px;
+}
+
 .navbar a {
     color: white;
     text-decoration: none;
     font-size: 20px;
+}
+
+.header .usuario-logado{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
 .agora {
@@ -725,4 +740,3 @@ body {
     75%  {transform: rotate(-25deg)}
     100% {transform: rotate(25deg)}
   }
-  
