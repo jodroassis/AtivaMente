@@ -740,3 +740,79 @@ body {
     75%  {transform: rotate(-25deg)}
     100% {transform: rotate(25deg)}
   }
+
+
+  /* PARTE DOS COMENTÁRIOS NO ARTIGO */
+  .avisos .container {
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#form_postagem{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 20px;
+  margin-bottom: 20px;
+}
+
+.avisos h1 {
+    font-size: 1.5em;
+    color: #444;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.avisos .div-form label {
+    font-weight: bold;
+    color: #555;
+    width: 100%;
+}
+
+.avisos .input-text, .textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.avisos .input-text:focus, .textarea:focus {
+    outline: none;
+    border-color: #0073e6;
+    box-shadow: 0 0 5px rgba(0, 115, 230, 0.3);
+}
+
+.avisos .btn-enviar {
+    width: 30%;
+    padding: 10px;
+    background-color: #0073e6;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.avisos .btn-enviar:hover {
+    background-color: #005bb5;
+}
+
+.avisos .div-results {
+    margin-top: 20px;
+}
+
+.avisos .feed-container {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fafafa;
+}

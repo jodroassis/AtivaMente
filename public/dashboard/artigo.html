@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/dashboards.css">
 </head>
-<body onload="validarSessao(); atualizarComentarios();">
+<body onload="validarSessao(), atualizarFeed()">
     <div class="header">
         <div class="container">
             <div class="logo">
@@ -103,30 +103,31 @@
     <div class="avisos">
         <div id="alerta"></div>
         <div class="container">
-            <h1>Deixe um comentário</h1>
+            <h1>Publicar um Comentário</h1>
             <div class="div-form">
-                <form id="form_comentario" method="post" onsubmit="return publicarComentario()">
+                <form id="form_postagem" method="post" onsubmit="return publicar()">
                     <label>
-                        Nome:
+                        Título:
                         <br>
-                        <input name="nome" id="nome" maxlength="50" type="text" required>
+                        <input name="titulo" id="titulo" maxlength="100" type="text" class="input-text">
                     </label>
                     <br><br>
                     <label>
-                        Comentário (máximo de 250 caracteres):
+                        Descrição (máximo de 250 caracteres):
                         <br>
-                        <textarea name="comentario" id="textarea_comentario" maxlength="250" rows="5" required></textarea>
+                        <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5" class="textarea"></textarea>
                     </label>
                     <br><br>
-                    <button type="submit">Enviar Comentário</button>
+                    <button class="btn-enviar">Enviar</button>
                 </form>
             </div>
-            <h1>Comentários</h1>
+            <h1>Mural de Comentários</h1>
             <div class="div-results">
-                <div id="comentarios_container" class="comentarios-container"></div>
+                <div id="feed_container" class="feed-container"></div>
             </div>
         </div>
     </div>
+    
     
 </div>
 </div>
@@ -153,71 +154,159 @@
         document.getElementById('span_curtida').textContent = `${curtida} curtidas`;
     }
 
-    function publicarComentario() {
-    var idUsuario = sessionStorage.ID_USUARIO;
-    var corpo = {
-        nome: form_comentario.nome.value,
-        comentario: form_comentario.comentario.value
-    };
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    mostrar_cpf.innerHTML = sessionStorage.CPF_USUARIO;
 
-    fetch(`/comentarios/publicar/${idUsuario}`, {
-        method: "post",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(corpo)
-    }).then(function (resposta) {
-        if (resposta.ok) {
-            alert("Comentário publicado com sucesso!");
-            limparFormularioComentario();
-            atualizarComentarios();
-        } else if (resposta.status === 404) {
-            alert("Erro 404: Comentário não encontrado.");
-        } else {
-            throw new Error("Erro ao publicar comentário! Código: " + resposta.status);
+    function limparFormulario() {
+        document.getElementById("form_postagem").reset();
+    }
+
+    function publicar() {
+        var idUsuario = sessionStorage.ID_USUARIO;
+        var cpf = sessionStorage.CPF_USUARIO;
+
+        var corpo = {
+            titulo: form_postagem.titulo.value,
+            descricao: form_postagem.descricao.value,
+            dataHora: new Date().toISOString() // pega a data e o horário no formato BD (AAAA-MM-DD HH-MM-SS)
         }
-    }).catch(function (error) {
-        console.error("Erro:", error);
-    });
 
-    return false;
-}
+        fetch(`/artigo/publicar/${idUsuario}`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(corpo)
+        }).then(function (resposta) {
 
-function limparFormularioComentario() {
-    document.getElementById("form_comentario").reset();
-}
+            console.log("resposta: ", resposta);
 
-function atualizarComentarios() {
-    fetch("/comentarios/listar").then(function (resposta) {
-        if (resposta.ok) {
-            resposta.json().then(function (dados) {
-                var comentariosContainer = document.getElementById("comentarios_container");
-                comentariosContainer.innerHTML = ""; // Limpar comentários anteriores
+            if (resposta.ok) {
+                window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
+                window.location = "/dashboard/artigo.html";
+                limparFormulario();
+                finalizarAguardar();
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
 
-                dados.forEach(function (comentario) {
-                    var divComentario = document.createElement("div");
-                    divComentario.className = "comentario";
+        return false;
 
-                    var spanNome = document.createElement("span");
-                    spanNome.className = "comentario-nome";
-                    spanNome.innerHTML = `<b>${comentario.nome}</b> comentou:`;
+    }
 
-                    var divTexto = document.createElement("div");
-                    divTexto.className = "comentario-texto";
-                    divTexto.innerHTML = comentario.comentario;
+    function editar(idArtigo) {
+        sessionStorage.ID_POSTAGEM_EDITANDO = idArtigo;
+        console.log("cliquei em editar - " + idArtigo);
+        window.alert("Você será redirecionado à página de edição do comentário de id número: " + idArtigo);
+        window.location = "/dashboard/edicao-aviso.html"
 
-                    divComentario.appendChild(spanNome);
-                    divComentario.appendChild(divTexto);
+    }
 
-                    comentariosContainer.appendChild(divComentario);
+    function deletar(idArtigo) {
+        console.log("Criar função de apagar post escolhido - ID" + idArtigo);
+        fetch(`/artigo/deletar/${idArtigo}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (resposta) {
+
+            if (resposta.ok) {
+                window.alert("Post deletado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
+                window.location = "/dashboard/artigo.html"
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    }
+
+    function atualizarFeed() {
+        fetch("/artigo/listar").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("feed_container");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    var feed = document.getElementById("feed_container");
+                    feed.innerHTML = "";
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+
+                        // criando e manipulando elementos do HTML via JavaScript
+                        var divPublicacao = document.createElement("div");
+                        var spanID = document.createElement("span");
+                        var spanTitulo = document.createElement("span");
+                        var spanNome = document.createElement("span");
+                        var divDescricao = document.createElement("div");
+                        var spanDataHora = document.createElement("span");
+                        var divButtons = document.createElement("div");
+                        var btnEditar = document.createElement("button");
+                        var btnDeletar = document.createElement("button");
+
+                        const data = new Date(publicacao.dtHora);
+                        const dataFormatada = data.toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
+
+                        // spanID.innerHTML = "ID: <b>" + publicacao.idArtigo + "</b>";
+                        spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
+                        spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
+                        divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
+                        spanDataHora.innerHTML = "Data e Hora: <b>" + dataFormatada + "</b>";
+                        btnEditar.innerHTML = "Editar";
+                        btnDeletar.innerHTML = "Deletar";
+
+                        divPublicacao.className = "publicacao";
+                        spanTitulo.id = "inputNumero" + publicacao.idArtigo;
+                        spanNome.className = "publicacao-nome";
+                        spanTitulo.className = "publicacao-titulo";
+                        divDescricao.className = "publicacao-descricao";
+
+                        divButtons.className = "div-buttons"
+
+                        btnEditar.className = "publicacao-btn-editar"
+                        btnEditar.id = "btnEditar" + publicacao.idArtigo;
+                        btnEditar.setAttribute("onclick", `editar(${publicacao.idArtigo})`);
+
+                        btnDeletar.className = "publicacao-btn-editar"
+                        btnDeletar.id = "btnDeletar" + publicacao.idArtigo;
+                        btnDeletar.setAttribute("onclick", `deletar(${publicacao.idArtigo})`);
+
+                        divPublicacao.appendChild(spanID);
+                        divPublicacao.appendChild(spanNome);
+                        divPublicacao.appendChild(spanTitulo);
+                        divPublicacao.appendChild(spanDataHora);
+                        divPublicacao.appendChild(divDescricao);
+                        divPublicacao.appendChild(divButtons);
+                        divButtons.appendChild(btnEditar);
+                        divButtons.appendChild(btnDeletar);
+                        feed.appendChild(divPublicacao);
+                    }
+
+                    finalizarAguardar();
                 });
-            });
-        } else {
-            throw new Error("Erro ao carregar comentários!");
-        }
-    }).catch(function (error) {
-        console.error("Erro:", error);
-    });
-}
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+            finalizarAguardar();
+        });
+    }
 
 </script>
