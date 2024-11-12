@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/dashboards.css">
 </head>
-<body onload="validarSessao(), atualizacaoPeriodica()">
+<body onload="validarSessao()">
     <div class="header">
         <div class="container">
             <div class="logo">
@@ -46,13 +46,13 @@
             <!-- Idade -->
             <div class="campo">
               <label for="idade">Qual a sua idade?</label>
-              <input type="number" id="idade" name="idade" min="10" max="100" required>
+              <input type="number" id="idade" required>
             </div>
     
             <!-- Frequência de Atividade Física -->
             <div class="campo">
               <label for="atividade-fisica">Com que frequência você pratica atividade física?</label>
-              <select id="atividade-fisica" name="atividade-fisica" required>
+              <select id="atividade_fisica" name="atividade-fisica" required>
                 <option value="diariamente">Diariamente</option>
                 <option value="semanalmente">1 a 3 vezes por semana</option>
                 <option value="ocasionalmente">Ocasionalmente</option>
@@ -81,7 +81,7 @@
             <!-- Saúde Mental -->
             <div class="campo">
               <label for="saude-mental">Como você descreveria sua saúde mental atualmente?</label>
-              <select id="saude-mental" name="saude-mental" required>
+              <select id="saude_mental" name="saude-mental" required>
                 <option value="excelente">Excelente</option>
                 <option value="boa">Boa</option>
                 <option value="regular">Regular</option>
@@ -93,7 +93,7 @@
             <!-- Objetivos de Saúde -->
             <div class="campo">
               <label for="objetivos-saude">Quais são os seus principais objetivos de saúde?</label>
-              <select id="objetivos-saude" name="objetivos-saude" multiple required>
+              <select id="objetivos_saude" name="objetivos-saude" multiple required>
                 <option value="emagrecimento">Emagrecimento</option>
                 <option value="ganho-massa">Ganho de massa muscular</option>
                 <option value="melhorar-condicao">Melhorar a condição física</option>
@@ -106,7 +106,7 @@
             <!-- Nível de Estresse -->
             <div class="campo">
               <label for="nivel-estresse">Como você classificaria seu nível de estresse?</label>
-              <select id="nivel-estresse" name="nivel-estresse" required>
+              <select id="nivel_estresse" name="nivel-estresse" required>
                 <option value="baixo">Baixo</option>
                 <option value="moderado">Moderado</option>
                 <option value="alto">Alto</option>
@@ -121,7 +121,7 @@
             </div>
     
             <!-- Botão de Envio -->
-            <button type="submit" class="btn">Enviar Respostas</button>
+            <button type="submit" onclick="cadastrar()">Enviar Respostas</button>
           </form>
         </div>
       </div>
@@ -139,3 +139,50 @@
       </div>
 </body>
 </html>
+
+<script>
+        function cadastrar() {
+
+    var idUsuario = sessionStorage.ID_USUARIO;
+    var cpf = sessionStorage.CPF_USUARIO;
+
+    // Coleta os dados do formulário
+    var corpo = {
+        idade: parseInt(idade.value), // Garantir que a idade seja um número
+        atividade_fisica: atividade_fisica.value,
+        alimentacao: alimentacao.value,
+        sono: parseInt(sono.value), // Garantir que o sono seja um número
+        saude_mental: saude_mental.value,
+        // Para pegar os objetivos de saúde selecionados, é necessário iterar sobre o select múltiplo
+        objetivos_saude: Array.from(objetivos_saude.selectedOptions).map(option => option.value),
+        nivel_estresse: nivel_estresse.value,
+        feedback_conteudos: feedback_conteudos.value // Adicionando feedback do formulário
+    };
+
+    // Exibe no console para depuração
+    console.log(corpo);
+
+    // Envia os dados para a API
+    fetch(`/pesquisa/cadastrar/${idUsuario}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(corpo) // Converte o objeto para JSON
+    }).then(function (resposta) {
+        if (resposta.ok) {
+            alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
+            window.location = "/dashboard/pesquisa.html";
+        } else if (resposta.status === 404) {
+            alert("Deu 404!");
+        } else {
+            throw new Error("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+        }
+    }).catch(function (erro) {
+        console.error(`#ERRO: ${erro}`);
+    });
+}
+
+
+        return false;
+</script>
