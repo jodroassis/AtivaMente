@@ -10,13 +10,14 @@ function listar(req, res) {
 }
 
 function cadastrar(req, res) {
-    var idade= req.body.idade
-    var atividade_fisica= req.body.atividade_fisica
-    var alimentacao= req.body.alimentacao
-    var sono= req.body.sono
-    var saude_mental= req.body.saude_mental
-    var objetivos_saude= req.body.objetivos_saude
-    var nivel_estresse= req.body.nivel_estresse
+    var idUsuario = req.body.idUsuario_Server
+    var idade= req.body.idadeServer
+    var atividade_fisica= req.body.atividade_fisicaServer
+    var alimentacao= req.body.alimentacaoServer
+    var sono= req.body.sonoServer
+    var saude_mental= req.body.saude_mentalServer
+    var objetivos_saude= req.body.objetivos_saudeServer
+    var nivel_estresse= req.body.nivel_estresseServer
 
     //if (nome == undefined) {
      //   res.status(400).send("Seu nome está undefined!");

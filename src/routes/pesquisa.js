@@ -3,8 +3,9 @@ var router = express.Router();
 
 var pesquisaController = require("../controllers/pesquisaController");
 
-router.post("/cadastrar/:idUsuario", function (req, res) {
+router.post("/cadastrar", function (req, res) {
     // função a ser chamada quando acessar /pesquisa/cadastrar
+    console.log("ESTOU AQUI")
     pesquisaController.cadastrar(req, res);
 });
 
