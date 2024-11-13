@@ -90,7 +90,7 @@ function publicar(req, res) {
 
 function editar(req, res) {
     var novaDescricao = req.body.descricao;
-    var idArtigo = req.params.idArtio;
+    var idArtigo = req.params.idArtigo;
 
     artigoModel.editar(novaDescricao, idArtigo)
         .then(
@@ -126,11 +126,20 @@ function deletar(req, res) {
         );
 }
 
+//CURTIR
+
+function curtir(req, res) {
+    var idArtigo = req.params.idArtigo;
+
+    artigoModel.curtir(idArtigo);
+}
+
 module.exports = {
     listar,
     listarPorUsuario,
     pesquisarDescricao,
     publicar,
     editar,
-    deletar
+    deletar,
+    curtir
 }

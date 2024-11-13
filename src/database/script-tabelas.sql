@@ -22,25 +22,26 @@ CREATE TABLE usuario (
 CREATE TABLE artigo (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	titulo VARCHAR(100),
-	descricao VARCHAR(150),
+	descricao VARCHAR(250),
     dtHora datetime,
 	fk_usuario INT,
 	FOREIGN KEY (fk_usuario) REFERENCES usuario(id)
-);
+);	
 
 create table pesquisa (
-	id int primary key auto_increment,
+	id int auto_increment,
     fkUsuario int,
     constraint fkUsuarioPesquisa foreign key(fkUsuario)
 		references usuario(id),
+	primary key(id, fkUsuario),
 	idade int,
     atividade_fisica varchar(45),
     alimentacao varchar(45),
-    sono int(45),
+    sono int,
     saude_mental varchar(45),
     objetivos_saude varchar(45),
     nivel_estresse varchar(45));
     
     select * from pesquisa;
     select * from usuario;
-
+    select * from artigo;

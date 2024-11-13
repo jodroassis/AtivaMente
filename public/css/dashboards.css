@@ -44,7 +44,7 @@ body {
 
 .dash-right .avisos .div-form textarea {
   width: 95%;
-  border: 3px solid #e6005a;
+  border: 3px solid #32b9cd;
   background-color: white;
   border-radius: 5px;
 }
@@ -58,7 +58,7 @@ body {
   font-size: 18px;
   padding: 10px 15px;
   color: white;
-  background-color: #e6005a;
+  background-color: green;
   width: 120px;
 }
 
@@ -286,7 +286,7 @@ body {
   font-weight: 600;
   font-size: 18px;
   padding: 10px 15px;
-  color: #e6005a;
+  color: #FFD700;
   background-color: white;
   margin: 5px;
   border-radius: 3px;
@@ -295,11 +295,11 @@ body {
 
 .btn-pink {
   color: white;
-  background-color: #e6005a;
+  background-color: #FFD700;
 }
 
 .btn-white {
-  color: #e6005a;
+  color: #FFD700;
   background-color: white;
 
 }
@@ -348,7 +348,7 @@ canvas {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  border-right: 3px solid #32b9cd;
+  border-right: 3px solid #FFD700;
   background-color: #000000;
 }
 
@@ -393,7 +393,7 @@ canvas {
 .btn-nav {
   width: 40%;
   color: white;
-  background-color: #e6005a;
+  background-color: #FFD700;
   border-radius: 5px;
   text-align: center;
   padding: 2% 5%;
@@ -402,14 +402,14 @@ canvas {
 .btn-nav-white {
   width: 40%;
   background-color: white;
-  border: 3px solid #e6005a;
+  border: 3px solid #32b9cd;
   border-radius: 5px;
   text-align: center;
   padding: 2% 5%;
 }
 
 .btn-nav-white h3 {
-  color: #e6005a;
+  color: #000;
   padding: 0;
   margin: 0;
 }

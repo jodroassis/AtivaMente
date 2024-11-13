@@ -49,7 +49,7 @@ body {
 .header .container {
     display: flex;
     justify-content: space-between;
-    width: 80%;
+    width: 90%;
     margin: auto;
     align-items: center;
 }
@@ -86,7 +86,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 600px;
+  width: 800px;
 }
 
 .navbar a {
@@ -583,12 +583,18 @@ body {
 .survey {
     background-color: #f7f9fa;
     padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .survey .container {
     text-align: center;
     width: 80%;
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .survey h2 {
@@ -598,12 +604,6 @@ body {
   .survey p {
     color: #7f8c8d;
     font-size: 18px;
-  }
-  
-  .survey form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
   
   .survey .container .campo {
@@ -624,7 +624,7 @@ body {
     font-size: 16px;
   }
   
-  .survey .btn {
+  .survey .btn-formulario {
     margin-top: 20px;
     background-color: #3498db;
     color: #fff;

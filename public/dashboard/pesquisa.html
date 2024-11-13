@@ -22,6 +22,7 @@
         <ul class="navbar">
           <li><a href="home.html" class="artigo">Artigo</a></li>
           <li><a href="#" class="agora">Pesquisa</a></li>
+          <li><a href="dashboard.html" class="dashboard">Dashboard</a></li>
           <li><a href="sobre.html" class="sobre">Sobre o Projeto</a></li>
           <li>|</li>
           <div class="usuario-logado">
@@ -42,8 +43,7 @@
     <div class="container">
       <h2>Compartilhe seus hábitos e metas de bem-estar!</h2>
       <p>Queremos entender como você cuida da sua saúde e quais são seus objetivos de bem-estar. Com suas respostas,
-        poderemos trazer conteúdos mais alinhados aos seus interesses.</p>
-
+        poderemos trazer conteúdos mais alinhados aos seus interesses.</p>  
         <!-- Idade -->
         <div class="campo">
           <label for="idade">Qual a sua idade?</label>
@@ -115,14 +115,8 @@
           </select>
         </div>
 
-        <!-- Feedback sobre Conteúdos -->
-        <div class="campo">
-          <label for="feedback_conteudos">Quais tipos de conteúdo gostaria de ver sobre vida saudável?</label>
-          <textarea id="feedback_conteudos" name="feedback_conteudos" rows="4"></textarea>
-        </div>
-
         <!-- Botão de Envio -->
-        <button onclick="cadastrar()">Enviar Respostas</button>
+        <button class="btn-formulario" onclick="cadastrar()">Enviar Respostas</button>
     </div>
   </div>
 
@@ -156,7 +150,6 @@
     var saude_mentalVar = saude_mental.value;
     var objetivos_saudeVar = objetivos_saude.value;
     var nivel_estresseVar = nivel_estresse.value;
-    //var nivel_estresseVar = nivel_estresse.value;
 
 
     // Exibe no console para depuração
