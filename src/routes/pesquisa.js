@@ -37,9 +37,9 @@ router.get("/alimentacao", function (req, res) {
     // função a ser chamada quando acessar /pesquisa/alimentacao
     pesquisaController.alimentacao(req, res);
 });
-router.get("/saudeMentalxEstresse", function (req, res) {
+router.get("/sonoSaudeMental", function (req, res) {
     // função a ser chamada quando acessar /pesquisa/saudeMentalxEstresse
-    pesquisaController.saudeMentalxEstresse(req, res);
+    pesquisaController.sonoSaudeMental(req, res);
 });
 router.get("/sonoxEstresse", function (req, res) {
     // função a ser chamada quando acessar /pesquisa/sonoxEstresse

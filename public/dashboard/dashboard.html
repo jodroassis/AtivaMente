@@ -1,82 +1,127 @@
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
+    <link
+      rel="shortcut icon"
+      href="../assets/icon/favicon2.ico"
+      type="image/x-icon"
+    />
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard de Saúde</title>
+    <title>AtivaMente | Dashboards</title>
+
+    <link rel="stylesheet" href="./../css/teste.css" />
+    <script src="../js/sessao.js"></script>
+    <script src="./../js/alerta.js"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- scripts do Chart.js - 2022-1 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-      }
-      .kpis {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-      }
-      .kpi-card {
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 20px;
-        width: 30%;
-        text-align: center;
-        background-color: #f9f9f9;
-      }
-      .chart-container {
-        margin-bottom: 40px;
-      }
-    </style>
+
+    <!--FONT AWESOME-->
+    <script
+      src="https://kit.fontawesome.com/9f7414eb10.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
-  <body onload="carregarDados()">
-    <h1>Dashboard de Saúde</h1>
 
-    <!-- Indicadores-Chave -->
-    <div class="kpis">
-      <div class="kpi-card">
-        <h3>Idade Média</h3>
-        <p id="idade-media">--</p>
+  <!-- <body onload=" atualizarFeed()"> -->
+
+  <body>
+    <div class="janela">
+      <div class="header-left">
+        <h1>AtivaMente</h1>
+
+        <div class="hello">
+          <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+          <span id="mostrar_cpf"></span>
+        </div>
+
+        <div class="btn-nav-white">
+          <a href="./home.html">
+            <h3>Início</h3>
+          </a>
+        </div>
+
+        <div class="btn-nav-white">
+          <a href="./pesquisa.html">
+            <h3>Pesquisa</h3>
+          </a>
+        </div>
+
+        <div class="btn-nav">
+          <h3>Gráficos</h3>
+        </div>
+
+        <div class="btn-logout" onclick="limparSessao()">
+          <h3>Sair</h3>
+        </div>
       </div>
-      <div class="kpi-card">
-        <h3>Atividades Físicas Regulares</h3>
-        <p id="atividade-fisica">--%</p>
+
+      <div class="dash" onload="carregarDados()">
+        <h1>Dashboard de Saúde</h1>
+
+        <!-- Indicadores-Chave -->
+        <div class="kpis">
+          <div class="kpi-card">
+            <h3>Idade Média</h3>
+            <p id="idade-media">--</p>
+          </div>
+          <div class="kpi-card">
+            <h3>Atividades Físicas Regulares</h3>
+            <p id="atividade-fisica">--%</p>
+          </div>
+          <div class="kpi-card">
+            <h3>Saúde Mental boa</h3>
+            <p id="saude-mental">--%</p>
+          </div>
+        </div>
+
+        <!-- Gráficos -->
+        <div class="pizza">
+          <div class="chart-container">
+            <h2>Atividade Física</h2>
+            <canvas id="graficoAtividadeFisica"></canvas>
+          </div>
+
+          <div class="chart-container">
+            <h2>Qualidade da Alimentação</h2>
+            <canvas id="graficoAlimentacao"></canvas>
+          </div>
+        </div>
+
+        <div class="dispersao">
+          <div class="chart-container">
+            <h2>Sono x Saúde Mental</h2>
+            <canvas id="graficoSonoSaudeMental"></canvas>
+          </div>
+
+          <!-- Gráficos de Correlacionamento -->
+          <div class="chart-container">
+            <h2>Horas de Sono e Nível de Estresse</h2>
+            <canvas id="graficoSonoxEstresse"></canvas>
+          </div>
+        </div>
+
+        <div>
+          <h3>Visualização de Objetivos de Saúde</h3>
+          <canvas id="graficoObjetivosSaude"></canvas>
+        </div>
       </div>
-      <div class="kpi-card">
-        <h3>Saúde Mental boa</h3>
-        <p id="saude-mental">--%</p>
-      </div>
-    </div>
-
-    <!-- Gráficos -->
-    <div class="chart-container">
-      <h2>Atividade Física</h2>
-      <canvas id="graficoAtividadeFisica"></canvas>
-    </div>
-
-    <div class="chart-container">
-      <h2>Qualidade da Alimentação</h2>
-      <canvas id="graficoAlimentacao"></canvas>
-    </div>
-
-    <div class="chart-container">
-      <h2>Saúde Mental e Nível de Estresse</h2>
-      <canvas id="graficoSaudeMentalxEstresse"></canvas>
-    </div>
-
-    <!-- Gráficos de Correlacionamento -->
-    <div class="chart-container">
-      <h2>Horas de Sono e Nível de Estresse</h2>
-      <canvas id="graficoSonoxEstresse"></canvas>
-    </div>
-
-    <div>
-      <h3>Visualização de Objetivos de Saúde</h3>
-      <canvas id="graficoObjetivosSaude"></canvas>
     </div>
   </body>
 </html>
 
 <script>
+  b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+  mostrar_cpf.innerHTML = sessionStorage.CPF_USUARIO;
+
   // Função chamada no carregamento da página
   window.onload = function () {
     carregarDados();
@@ -277,33 +322,30 @@
       );
 
     // Requisição para saúde mental vs estresse
-    fetch("/pesquisa/saudeMentalxEstresse")
+    fetch("/pesquisa/sonoSaudeMental")
       .then((response) => response.json())
       .then((data) => {
+        console.log(data); // Verifique se os dados estão sendo carregados corretamente
         if (data && Array.isArray(data)) {
-          // Organizando os dados para o gráfico de dispersão
-          const saudeMentalEstresse = data.map((item) => ({
-            saude_mental: item.saude_mental, // Como saúde mental é uma categoria
-            nivel_estresse: item.nivel_estresse, // O nível de estresse (baixo, alto, etc.)
-            quantidade: item.quantidade, // Quantidade de ocorrências
+          const sonoSaudeMental = data.map((item) => ({
+            saude_mental: item.saude_mental,
+            sono: item.sono,
+            quantidade: item.quantidade,
           }));
 
           // Chama a função para desenhar o gráfico de dispersão
           plotarGraficoDispersao(
-            saudeMentalEstresse,
-            "graficoSaudeMentalxEstresse", // ID do canvas
-            "Saúde Mental x Estresse" // Título do gráfico
+            sonoSaudeMental,
+            "graficoSonoSaudeMental", // ID do canvas
+            "Sono x Saúde Mental" // Título do gráfico
           );
         } else {
-          console.error(
-            "Erro ao carregar dados de saúde mental x estresse:",
-            data
-          );
+          console.error("Erro ao carregar dados de sono x saúde mental:", data);
         }
       })
-      .catch((error) =>
-        console.log("Erro ao carregar dados de saúde mental x estresse:", error)
-      );
+      .catch((error) => {
+        console.error("Erro ao carregar dados de sono x saúde mental:", error);
+      });
 
     // Requisição para objetivos de saúde
     fetch("/pesquisa/objetivoSaude")
@@ -504,86 +546,63 @@
     });
   }
 
-  function plotarGraficoDispersao(dados, idCanvas, titulo) {
-    const ctx = document.getElementById(idCanvas).getContext("2d");
-    if (!ctx) {
-      console.error(`Canvas com id ${idCanvas} não encontrado.`);
-      return;
-    }
+  function plotarGraficoDispersao(data, canvasId, titulo) {
+    const ctx = document.getElementById(canvasId).getContext("2d");
 
-    // Normalizando os valores de saúde mental e estresse
-    const niveisSaudeMental = {
-      excelente: 4,
-      boa: 3,
-      regular: 2,
-      fraca: 1,
+    const chartData = {
+      datasets: [
+        {
+          label: titulo,
+          data: data.map((item) => ({
+            x: item.sono,
+            y:
+              item.saude_mental === "excelente"
+                ? 1
+                : item.saude_mental === "boa"
+                ? 2
+                : item.saude_mental === "regular"
+                ? 3
+                : 4, // Transformando a categoria em números
+            r: item.quantidade * 5, // O tamanho do ponto depende da quantidade
+          })),
+          backgroundColor: "rgba(75, 192, 192, 0.2)",
+          borderColor: "rgba(75, 192, 192, 1)",
+          borderWidth: 1,
+        },
+      ],
     };
 
-    const niveisEstresse = {
-      baixo: 1,
-      alto: 2,
-      "muito alto": 3,
-    };
-
-    // Organize os dados para o gráfico de dispersão
-    const pontos = dados.map((item) => ({
-      x: niveisSaudeMental[item.saude_mental] || 0, // Converte a saúde mental para valor numérico
-      y: niveisEstresse[item.nivel_estresse] || 0, // Converte o nível de estresse para valor numérico
-      r: item.quantidade * 10, // Tamanho do ponto, baseado na quantidade
-    }));
-
-    // Criar o gráfico de dispersão
-    new Chart(ctx, {
-      type: "bubble", // Tipo do gráfico (dispersão)
-      data: {
-        datasets: [
-          {
-            label: titulo,
-            data: pontos, // Dados organizados
-            backgroundColor: "rgba(54, 162, 235, 0.6)", // Cor dos pontos
-            borderColor: "rgba(54, 162, 235, 1)",
-            borderWidth: 1,
-          },
-        ],
-      },
+    const config = {
+      type: "bubble", // Usando um gráfico de bolhas
+      data: chartData,
       options: {
         responsive: true,
         scales: {
           x: {
-            type: "linear", // Escala linear para o eixo X
-            min: 0,
-            max: 4, // Limites para os níveis de saúde mental
-            ticks: {
-              stepSize: 1,
-              callback: function (value) {
-                const labels = ["Fraca", "Regular", "Boa", "Excelente"];
-                return labels[value] || "";
-              },
+            title: {
+              display: true,
+              text: "Horas de Sono",
             },
           },
           y: {
-            type: "linear", // Escala linear para o eixo Y
-            min: 0,
-            max: 3, // Limites para os níveis de estresse
+            title: {
+              display: true,
+              text: "Saúde Mental",
+            },
             ticks: {
-              stepSize: 1,
               callback: function (value) {
-                const labels = ["Baixo", "Alto", "Muito Alto"];
-                return labels[value] || "";
+                if (value === 1) return "Excelente";
+                if (value === 2) return "Boa";
+                if (value === 3) return "Regular";
+                return "Fraca";
               },
             },
           },
         },
-        plugins: {
-          title: {
-            display: true,
-            text: titulo, // Título do gráfico
-          },
-          legend: {
-            display: false, // Esconder a legenda (se necessário)
-          },
-        },
       },
-    });
+    };
+
+    // Criando o gráfico
+    new Chart(ctx, config);
   }
 </script>

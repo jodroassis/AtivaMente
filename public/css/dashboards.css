@@ -431,3 +431,20 @@ canvas {
   padding: 10px 15px;
   cursor: pointer;
 }
+
+.kpis {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.kpi-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  width: 30%;
+  text-align: center;
+  background-color: #f9f9f9;
+}
+.chart-container {
+  margin-bottom: 40px;
+}

@@ -84,8 +84,8 @@ function alimentacao(req, res) {
         res.status(500).json(erro.sqlMessage);
     })
 }
-function saudeMentalxEstresse(req, res) {
-    pesquisaModel.saudeMentalxEstresse().then(function(resultado){
+function sonoSaudeMental(req, res) {
+    pesquisaModel.sonoSaudeMental().then(function(resultado){
         // precisamos informar que o resultado voltará para o front-end como uma resposta em json
         res.status(200).json(resultado);
     }).catch(function(erro){
@@ -158,7 +158,7 @@ module.exports = {
     calcularSaudeMental,
     atividadeFisica,
     alimentacao,
-    saudeMentalxEstresse,
+    sonoSaudeMental,
     sonoxEstresse,
     objetivoSaude,
     buscarUltimasMedidas,

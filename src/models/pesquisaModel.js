@@ -68,10 +68,10 @@ function alimentacao() {
                    return database.executar(instrucao);
 }
 
-function saudeMentalxEstresse() {
-    var instrucao = `SELECT saude_mental, nivel_estresse, COUNT(*) AS quantidade
+function sonoSaudeMental() {
+    var instrucao = `SELECT saude_mental, sono, COUNT(*) AS quantidade
                    FROM pesquisa
-                   GROUP BY saude_mental, nivel_estresse;`;
+                   GROUP BY saude_mental, sono;`;
                    console.log("Executando a instrução SQL: \n" + instrucao);
                    return database.executar(instrucao);
 }
@@ -110,7 +110,7 @@ module.exports = {
     calcularSaudeMental,
     atividadeFisica,
     alimentacao,
-    saudeMentalxEstresse,
+    sonoSaudeMental,
     sonoxEstresse,
     objetivoSaude,
     buscarUltimasMedidas,

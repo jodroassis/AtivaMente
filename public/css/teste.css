@@ -1,0 +1,211 @@
+/* Reseta margens e paddings padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Exo 2', sans-serif;
+  }
+  
+  /* Configuração geral do body */
+  body {
+    background-color: #f3f4f6;
+    color: #333;
+    font-size: 16px;
+  }
+  
+  /* Container principal do dashboard */
+  .janela {
+    display: flex;
+    height: 100vh;
+  }
+  
+  /* Barra lateral */
+  .header-left {
+    display: flex;
+    align-items: center;
+    background-color: #000000;
+    color: white;
+    padding: 20px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  .header-left a {
+    text-decoration: none;
+    color: white;
+  }
+  
+  .header-left h1 {
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .hello {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hello h3 {
+    color: #e3b062;
+    font-weight: 300;
+    font-size: 1.2rem;
+  }
+  
+  .hello h3 span {
+    font-weight: 800;
+  }
+  
+  .hello span{
+    color: #e3b062;
+  }
+  
+  .btn-nav, .btn-nav-white {
+    width: 60%;
+    background-color: transparent;
+    padding: 10px 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    text-align: center;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  
+  .btn-nav-white {
+    background-color: #ffffff22;
+    color: #ffffff;
+  }
+  
+  .btn-nav-white:hover {
+    background-color: #ffffff44;
+  }
+  
+  .btn-nav {
+    background-color: #ffffff;
+    color: #0369a1;
+    font-weight: bold;
+  }
+  
+  .btn-nav:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .btn-logout {
+    width: 60%;
+    background-color: #e63946;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .btn-logout:hover {
+    background-color: #d62828;
+  }
+  
+  /* Área do dashboard */
+  .dash {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+  }
+  .dash h1{
+    text-align: center;
+  }
+  
+  .dash h1 {
+    margin-bottom: 30px;
+    font-size: 24px;
+    color: #0369a1;
+    font-weight: bold;
+  }
+  
+  /* Indicadores principais */
+  .kpis {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .kpi-card {
+    flex: 1;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .kpi-card h3 {
+    font-size: 18px;
+    color: #0369a1;
+    margin-bottom: 10px;
+  }
+  
+  .kpi-card p {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Containers dos gráficos */
+  .chart-container {
+    margin-bottom: 40px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+  }
+  
+  .chart-container h2 {
+    font-size: 18px;
+    color: #0369a1;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  canvas {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .pizza{
+    display: flex;
+    gap: 50px;
+  }
+  .dispersao{
+    display: flex;
+    gap: 50px;
+  }
+  
+  /* Estilo para dispositivos menores */
+  @media (max-width: 768px) {
+    .janela {
+      flex-direction: column;
+    }
+  
+    .header-left {
+      width: 100%;
+      text-align: center;
+    }
+  
+    .dash {
+      padding: 20px;
+    }
+  
+    .kpis {
+      flex-direction: column;
+    }
+  }
+  
