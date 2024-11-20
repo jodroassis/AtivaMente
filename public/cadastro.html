@@ -1,127 +1,114 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>AtivaMente | Cadastro</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <script src="./js/sessao.js"></script>
+  <title>AtivaMente | Cadastro</title>
 
-    <link rel="stylesheet" href="./css/style.css" />
-    <link rel="icon" href="./assets/icon/favicon2.ico" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-  </head>
+  <script src="./js/sessao.js"></script>
 
-  <body>
-    <!--header inicio-->
-    <div class="header">
-      <div class="container">
-        <div class="logo">
-          <h1>AtivaMente</h1>
-        </div>
-        <nav class="menu">
-          <ul class="navbar">
-            <li><a href="index.html" class="artigo">Artigo</a></li>
-            <li><a href="pesquisa.html" class="pesquisa">Pesquisa</a></li>
-            <li><a href="sobre.html" class="sobre">Sobre o Projeto</a></li>
-            <li>|</li>
-            <li><a href="login.html" class="botao-login">Login</a></li>
-            <li><a href="#" class="botao-cadastro">Cadastro</a></li>
-          </ul>
-        </nav>
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="icon" href="./assets/icon/favicon2.ico" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+</head>
+
+<body>
+  <!--header inicio-->
+  <div class="header">
+    <div class="container">
+      <div class="logo">
+        <h1>AtivaMente</h1>
+      </div>
+      <nav class="menu">
+        <ul class="navbar">
+          <li><a href="index.html" class="artigo">Artigo</a></li>
+          <li><a href="pesquisa.html" class="pesquisa">Pesquisa</a></li>
+          <li><a href="sobre.html" class="sobre">Sobre o Projeto</a></li>
+          <li>|</li>
+          <li><a href="login.html" class="botao-login">Login</a></li>
+          <li><a href="#" class="botao-cadastro">Cadastro</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!--header fim-->
+
+  <div class="login">
+    <div class="alerta_erro">
+      <div class="card_erro" id="cardErro">
+        <span id="mensagem_erro"></span>
       </div>
     </div>
-    <!--header fim-->
-
-    <div class="login">
-      <div class="alerta_erro">
-        <div class="card_erro" id="cardErro">
-          <span id="mensagem_erro"></span>
-        </div>
-      </div>
-      <div class="container">
-        <div class="card card-cadastro">
-          <h2>Bem-vindo!</h2>
-          <div class="formulario">
-            <!--
+    <div class="container">
+      <div class="card card-cadastro">
+        <h2>Bem-vindo!</h2>
+        <div class="formulario">
+          <!--
                          Para inserir mais um campo, copie uma das inputs abaixo.
                          Assim que inserir vá para o script abaixo.
                      -->
-            <div class="campo">
-              <span>Nome:</span>
-              <input id="nome_input" type="text" placeholder="Seu nome" />
-              <div id="div_erro_nome"></div>
-            </div>
-            <div class="campo">
-              <span>E-mail:</span>
-              <input
-                id="email_input"
-                type="text"
-                placeholder="meuemail@provedor.com"
-              />
-              <div id="div_erro_email"></div>
-            </div>
-            <div class="campo">
-              <span>Data de Nascimento</span>
-              <input id="dtNasc_input" type="date" placeholder="AAAA-MM-DD" />
-            </div>
-            <div class="campo">
-              <span>CPF:</span>
-              <input
-                id="cpf_input"
-                type="text"
-                placeholder="Insira aqui seu CPF"
-              />
-              <div id="div_erro_cpf"></div>
-            </div>
-            <div class="campo">
-              <span>Senha:</span>
-              <input id="senha_input" type="password" placeholder="******" />
-              <div id="div_erro_senha_tam"></div>
-            </div>
-            <div class="campo">
-              <span>Confirmação da Senha:</span>
-              <input
-                id="confirmacao_senha_input"
-                type="password"
-                placeholder="******"
-              />
-              <div id="div_erro_senha_conf"></div>
-            </div>
-            <button class="botao" onclick="cadastrar()">Cadastrar</button>
+          <div class="campo">
+            <span>Nome:</span>
+            <input id="nome_input" type="text" placeholder="Seu nome" />
+            <div id="div_erro_nome"></div>
           </div>
-          <div id="div_aguardar" class="loading-div">
-            <img src="./assets/circle-loading.gif" id="loading-gif" />
+          <div class="campo">
+            <span>E-mail:</span>
+            <input id="email_input" type="text" placeholder="meuemail@provedor.com" />
+            <div id="div_erro_email"></div>
           </div>
-
-          <div id="div_erros_login"></div>
+          <div class="campo">
+            <span>Data de Nascimento</span>
+            <input id="dtNasc_input" type="date" placeholder="AAAA-MM-DD" />
+          </div>
+          <div class="campo">
+            <span>CPF:</span>
+            <input id="cpf_input" type="text" placeholder="Insira aqui seu CPF" />
+            <div id="div_erro_cpf"></div>
+          </div>
+          <div class="campo">
+            <span>Senha:</span>
+            <input id="senha_input" type="password" placeholder="******" />
+            <div id="div_erro_senha_tam"></div>
+          </div>
+          <div class="campo">
+            <span>Confirmação da Senha:</span>
+            <input id="confirmacao_senha_input" type="password" placeholder="******" />
+            <div id="div_erro_senha_conf"></div>
+          </div>
+          <button class="botao" onclick="cadastrar()">Cadastrar</button>
         </div>
+        <div id="div_aguardar" class="loading-div">
+          <img src="./assets/circle-loading.gif" id="loading-gif" />
+        </div>
+
+        <div id="div_erros_login"></div>
       </div>
     </div>
+  </div>
 
-    <!--footer inicio-->
-    <div class="footer">
-      <p>
-        Feito por João Assis &hearts; SPTech &copy; 2024 |
-        <span class="version">v1.0.0</span>
-      </p>
-      <div class="icones_redes">
-        <div class="linkdin">
-          <a href="https://www.linkedin.com/in/jodro-assis/" target="_blank"
-            ><img src="./assets/imgs/linkedin.png" width="20px"
-          /></a>
-        </div>
-        <div class="github">
-          <a href="https://github.com/jodroassis" target="_blank"
-            ><img src="./assets/imgs/github.png" width="20px"
-          /></a>
-        </div>
+  <!--footer inicio-->
+  <div class="footer">
+    <p>
+      Feito por João Assis &hearts; SPTech &copy; 2024 |
+      <span class="version">v1.0.0</span>
+    </p>
+    <div class="icones_redes">
+      <div class="linkdin">
+        <a href="https://www.linkedin.com/in/jodro-assis/" target="_blank"><img src="./assets/imgs/linkedin.png"
+            width="20px" /></a>
+      </div>
+      <div class="github">
+        <a href="https://github.com/jodroassis" target="_blank"><img src="./assets/imgs/github.png" width="20px" /></a>
       </div>
     </div>
-    <!--footer fim-->
-  </body>
+  </div>
+  <!--footer fim-->
+</body>
+
 </html>
 
 <script>
@@ -147,18 +134,52 @@
     //verificar erro no cadastro
     if (nomeVar.length < 2) {
       div_erro_nome.innerHTML = `<spam style="color: red">Nome pequeno. Minímo 2 letras.</spam>`;
+      cardErro.style.display = "block";
+
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
     }
+
     if (senhaVar.length < 7) {
       div_erro_senha_tam.innerHTML = `<spam style="color: red">Senha fraca. Minímo 7 caractéres</spam>`;
+      cardErro.style.display = "block";
+
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
     }
+
     if (senhaVar != confirmacaoSenhaVar) {
       div_erro_senha_conf.innerHTML = `<spam style="color: red">Senhas devem ser iguais.</spam>`;
+      cardErro.style.display = "block";
+
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
     }
+
     if (cpfVar.length != 11) {
       div_erro_cpf.innerHTML = `<spam style="color: red">CPF deve ter 11 caractéres</spam>`;
+      cardErro.style.display = "block";
+
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
     }
+
     if (emailArroba == false && emailPonto == false) {
       div_erro_email.innerHTML = `<spam style="color: red">Email não possui @ ou .</spam>`;
+      cardErro.style.display = "block";
+
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
     }
 
     //apagar a mensagem caso esteja certo
