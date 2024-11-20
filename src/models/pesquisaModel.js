@@ -9,6 +9,15 @@ function buscarUltimasMedidas() {
     return database.executar(instrucaoSql);
 }
 
+function validarId(idUsuario) {
+
+    var instrucaoSql = `SELECT * from pesquisa
+                            where fkUsuario = ${idUsuario}`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 function buscarMedidasEmTempoReal() {
 
     var instrucaoSql = `SELECT fkUsuario, nome, idade, atividade_fisica, alimentacao, sono, saude_mental, objetivos_saude, nivel_estresse
@@ -114,5 +123,6 @@ module.exports = {
     sonoxEstresse,
     objetivoSaude,
     buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
+    buscarMedidasEmTempoReal,
+    validarId
 };

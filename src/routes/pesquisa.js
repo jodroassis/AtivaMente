@@ -13,6 +13,10 @@ router.get("/ultimas/", function (req, res) {
     medidaController.buscarUltimasMedidas(req, res);
 });
 
+router.get("/validarId/:idUsuario", function (req, res) {
+    pesquisaController.validarId(req, res);
+});
+
 router.get("/tempo-real/", function (req, res) {
     medidaController.buscarMedidasEmTempoReal(req, res);
 })

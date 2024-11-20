@@ -9,6 +9,16 @@ function listar(req, res) {
     })
 }
 
+function validarId(req, res) {
+    var idUsuario = req.params.idUsuario;
+    pesquisaModel.validarId(idUsuario).then(function(resultado){
+        // precisamos informar que o resultado voltará para o front-end como uma resposta em json
+        res.status(200).json(resultado);
+    }).catch(function(erro){
+        res.status(500).json(erro.sqlMessage);
+    })
+}
+
 function buscarUltimasMedidas(req, res) {
 
     console.log(`Recuperando as ultimas medidas`);
@@ -162,5 +172,6 @@ module.exports = {
     sonoxEstresse,
     objetivoSaude,
     buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
+    buscarMedidasEmTempoReal,
+    validarId
 }
