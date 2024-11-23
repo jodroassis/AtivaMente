@@ -133,7 +133,7 @@
       .then((response) => response.json())
       .then((data) => {
         if (data && data[0] && typeof data[0].idadeMedia === "string") {
-          const idadeMedia = parseFloat(data[0].idadeMedia).toFixed(1); // Converte para número e arredonda
+          var idadeMedia = parseFloat(data[0].idadeMedia).toFixed(1); // Converte para número e arredonda
           document.getElementById(
             "idade-media"
           ).textContent = `${idadeMedia} anos`;
@@ -243,49 +243,79 @@
     fetch("/pesquisa/atividadeFisica")
       .then((response) => response.json())
       .then((data) => {
-        if (data && Array.isArray(data)) {
-          const atividadeFisica = [
-            { label: "Diariamente", value: data[0]?.quantidade || 0 },
-            { label: "Semanalmente", value: data[1]?.quantidade || 0 },
-            { label: "Ocasionalmente", value: data[2]?.quantidade || 0 },
-            { label: "Raramente", value: data[3]?.quantidade || 0 },
-            { label: "Nunca", value: data[4]?.quantidade || 0 },
-          ];
-          plotarGraficoPizza(
-            atividadeFisica,
-            "graficoAtividadeFisica",
-            "Frequência de Atividade Física"
-          );
+        // Cria um conjunto padrão de categorias
+        const categorias = [
+          { label: "Diariamente", value: 0 },
+          { label: "Semanalmente", value: 0 },
+          { label: "Ocasionalmente", value: 0 },
+          { label: "Raramente", value: 0 },
+          { label: "Nunca", value: 0 },
+        ];
+
+        // Mapeia os dados retornados para as categorias
+        if (Array.isArray(data)) {
+          data.forEach((item) => {
+            const categoria = categorias.find(
+              (cat) =>
+                cat.label.toLowerCase() === item.atividade_fisica.toLowerCase()
+            );
+            if (categoria) {
+              categoria.value = item.quantidade || 0;
+            }
+          });
         } else {
           console.error("Erro ao carregar dados de atividade física:", data);
+          return;
         }
+
+        // Plota o gráfico de pizza com os dados
+        plotarGraficoPizza(
+          categorias,
+          "graficoAtividadeFisica",
+          "Frequência de Atividade Física"
+        );
       })
       .catch((error) =>
-        console.log("Erro ao carregar dados de atividade física:", error)
+        console.error("Erro ao carregar dados de atividade física:", error)
       );
 
     // Requisição para alimentação
     fetch("/pesquisa/alimentacao")
       .then((response) => response.json())
       .then((data) => {
-        if (data && Array.isArray(data)) {
-          const alimentacao = [
-            { label: "Saudável", value: data[0]?.quantidade || 0 },
-            { label: "Balanceada", value: data[1]?.quantidade || 0 },
-            { label: "Desregrada", value: data[2]?.quantidade || 0 },
-            { label: "Vegetariana", value: data[3]?.quantidade || 0 },
-          ];
-          plotarGraficoPizza(
-            alimentacao,
-            "graficoAlimentacao",
-            "Qualidade da Alimentação"
-          );
+        // Cria um conjunto padrão de categorias
+        const categorias = [
+          { label: "saudavel", value: 0 },
+          { label: "balanceada", value: 0 },
+          { label: "desregrada", value: 0 },
+          { label: "vegetariana", value: 0 },
+        ];
+
+        // Mapeia os dados retornados para as categorias
+        if (Array.isArray(data)) {
+          data.forEach((item) => {
+            const categoria = categorias.find(
+              (cat) =>
+                cat.label.toLowerCase() === item.alimentacao.toLowerCase()
+            );
+            if (categoria) {
+              categoria.value = item.quantidade || 0;
+            }
+          });
         } else {
           console.error("Erro ao carregar dados de alimentação:", data);
+          return;
         }
+
+        // Plota o gráfico de pizza com os dados
+        plotarGraficoPizza(
+          categorias,
+          "graficoAlimentacao",
+          "Qualidade da Alimentação"
+        );
       })
       .catch((error) =>
-        console.log("Erro ao carregar dados de alimentação:", error)
+        console.error("Erro ao carregar dados de alimentação:", error)
       );
 
     // Requisição para correlação entre sono e estresse
@@ -295,13 +325,10 @@
         if (data && Array.isArray(data)) {
           const correlacaoSonoEstresse = data.map((item) => ({
             x: item.sono,
-            y:
-              item.nivel_estresse === "baixo"
-                ? 1
-                : item.nivel_estresse === "alto"
-                ? 2
-                : 3,
+            y: item.nivel_estresse,
+            quantidade: item.quantidade,
           }));
+
           plotarGraficoScatter(
             correlacaoSonoEstresse,
             "graficoSonoxEstresse",
@@ -315,7 +342,7 @@
         }
       })
       .catch((error) =>
-        console.log(
+        console.error(
           "Erro ao carregar dados de correlação sono-estresse:",
           error
         )
@@ -430,38 +457,48 @@
       console.error(`Canvas com id ${canvasId} não encontrado.`);
       return;
     }
+
     const ctx = canvas.getContext("2d");
-    const chart = new Chart(ctx, {
+
+    const chartData = {
+      datasets: [
+        {
+          label: titulo,
+          data: data,
+          backgroundColor: "rgba(75, 192, 192, 0.2)",
+          borderColor: "rgba(75, 192, 192, 1)",
+          borderWidth: 1,
+          pointRadius: data.map((item) => item.quantidade * 5), // Tamanho dos pontos com base na quantidade
+        },
+      ],
+    };
+
+    const config = {
       type: "scatter",
-      data: {
-        datasets: [
-          {
-            label: titulo,
-            data: data,
-            backgroundColor: "#ff6384",
-            borderColor: "#ff6384",
-            borderWidth: 1,
-          },
-        ],
-      },
+      data: chartData,
       options: {
         responsive: true,
         scales: {
-          x: { type: "linear", position: "bottom" },
-          y: { beginAtZero: true },
-        },
-        plugins: {
-          tooltip: {
-            callbacks: {
-              label: function (tooltipItem) {
-                return `X: ${tooltipItem.raw.x}, Y: ${tooltipItem.raw.y}`;
-              },
+          x: {
+            title: {
+              display: true,
+              text: "Horas de Sono",
+            },
+          },
+          y: {
+            type: "category", // Eixo categórico
+            labels: ["Baixo", "Moderado", "Alto"], // Rótulos do eixo Y
+            title: {
+              display: true,
+              text: "Nível de Estresse",
             },
           },
         },
       },
-    });
-    canvas.chart = chart; // Salva a referência do gráfico no canvas
+    };
+
+    // Criando o gráfico
+    new Chart(ctx, config);
   }
 
   // Função para plotar gráfico de barras
@@ -553,18 +590,23 @@
       datasets: [
         {
           label: titulo,
-          data: data.map((item) => ({
-            x: item.sono,
-            y:
-              item.saude_mental === "excelente"
-                ? 1
-                : item.saude_mental === "boa"
-                ? 2
-                : item.saude_mental === "regular"
-                ? 3
-                : 4, // Transformando a categoria em números
-            r: item.quantidade * 5, // O tamanho do ponto depende da quantidade
-          })),
+          data: data.map((item) => {
+            let yValue;
+            if (item.saude_mental === "excelente") {
+              yValue = 1;
+            } else if (item.saude_mental === "boa") {
+              yValue = 2;
+            } else if (item.saude_mental === "regular") {
+              yValue = 3;
+            } else {
+              yValue = 4; // Para qualquer outro caso
+            }
+            return {
+              x: item.sono,
+              y: yValue, // Transformando a categoria em números
+              r: item.quantidade * 5, // O tamanho do ponto depende da quantidade
+            };
+          }),
           backgroundColor: "rgba(75, 192, 192, 0.2)",
           borderColor: "rgba(75, 192, 192, 1)",
           borderWidth: 1,
