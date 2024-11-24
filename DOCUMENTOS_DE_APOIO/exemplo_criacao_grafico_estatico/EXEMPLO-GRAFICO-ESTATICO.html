@@ -27,17 +27,17 @@ function obterDados(){
   // Aqui seria a função que obteria os dados do banco de dados
   // No caso, aqui você colocaria o fetch que teria o endereço da sua rota que você criou na pasta /routes e chamaria a função plotarGraficoLinha nessa função. Exemplo:
  
-  // fetch('/obterDados')
-  // .then(function(response){
-  //   return response.json();
-  // })
-  // .then(function(data){
-  //   plotarGraficoLinha(data);
-  //   plotarGraficoBarra(data);
-  // })
-  // .catch(function(err){
-  //   console.log(err);
-  // })
+  fetch('/obterDados')
+  .then(function(response){
+    return response.json();
+  })
+  .then(function(data){
+    plotarGraficoLinha(data);
+    plotarGraficoBarra(data);
+  })
+  .catch(function(err){
+    console.log(err);
+  })
 
   // Como eu não configurei as rotas, eu criei um array com os dados para simular a obtenção dos dados
   var dados = [{

@@ -37,7 +37,7 @@ function obterDados() {
 }
 
 function calcularIdadeMedia() {
-    var instrucao = 'SELECT AVG(idade) AS idadeMedia FROM pesquisa;';
+    var instrucao = 'SELECT TRUNCATE(AVG(idade),0) AS idadeMedia FROM pesquisa;';
     return database.executar(instrucao);
 }
 

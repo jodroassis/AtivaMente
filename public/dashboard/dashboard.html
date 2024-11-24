@@ -31,9 +31,7 @@
     ></script>
   </head>
 
-  <!-- <body onload=" atualizarFeed()"> -->
-
-  <body>
+  <body onload="obterresponse()">
     <div class="janela">
       <div class="header-left">
         <h1>AtivaMente</h1>
@@ -64,10 +62,9 @@
         </div>
       </div>
 
-      <div class="dash" onload="carregarDados()">
+      <div class="dash">
         <h1>Dashboard de Saúde</h1>
 
-        <!-- Indicadores-Chave -->
         <div class="kpis">
           <div class="kpi-card">
             <h3>Idade Média</h3>
@@ -122,529 +119,301 @@
   b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
   mostrar_cpf.innerHTML = sessionStorage.CPF_USUARIO;
 
-  // Função chamada no carregamento da página
-  window.onload = function () {
-    carregarDados();
-  };
-  // Função para carregar os dados e preencher os indicadores e gráficos
-  function carregarDados() {
-    // Requisição para calcular a idade média
+
+  function obterresponse() {
+    
     fetch("/pesquisa/calcularIdadeMedia")
       .then((response) => response.json())
       .then((data) => {
-        if (data && data[0] && typeof data[0].idadeMedia === "string") {
-          var idadeMedia = parseFloat(data[0].idadeMedia).toFixed(1); // Converte para número e arredonda
-          document.getElementById(
-            "idade-media"
-          ).textContent = `${idadeMedia} anos`;
-        } else {
-          console.error(
-            "Erro ao carregar dados de idade média: dados inesperados",
-            data
-          );
-        }
+        var numeroInt = Number(data[0].idadeMedia);
+        document.getElementById(
+          "idade-media"
+        ).textContent = `${numeroInt} anos`;
       })
       .catch((error) =>
-        console.log("Erro ao carregar dados de idade média:", error)
+        console.log("Erro ao carregar response de idade média:", error)
       );
 
-    // Requisição para calcular a frequência de atividade física
+
     fetch("/pesquisa/calcularFrequenciaAtividade")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Dados de Atividade Física:", data); // Verificar dados retornados
-        if (data && Array.isArray(data)) {
-          const atividadeFisica = data.map((item) => ({
-            label: item.atividade_fisica,
-            value: parseFloat(item.porcentagem) || 0, // Converte a porcentagem para número
-          }));
-
-          // Mostrar a porcentagem na KPI
-          const atividadeFisicaTotal = atividadeFisica.reduce(
-            (acc, item) => acc + item.value,
-            0
-          );
-          const mediaAtividadeFisica = (
-            atividadeFisicaTotal / atividadeFisica.length
-          ).toFixed(1);
-          document.getElementById(
-            "atividade-fisica"
-          ).textContent = `${mediaAtividadeFisica}%`;
-
-          plotarGraficoPizza(
-            atividadeFisica,
-            "graficoAtividadeFisica",
-            "Frequência de Atividade Física"
-          );
-        } else {
-          console.error(
-            "Erro ao carregar dados de atividade física: dados inesperados",
-            data
-          );
-        }
+      .then(function (response) {
+        return response.json();
       })
-      .catch((error) =>
-        console.log("Erro ao carregar dados de atividade física:", error)
-      );
+      .then(function (data) {
+        var totalPorcentagem = 0;
 
-    // Requisição para calcular saúde mental
-    fetch("/pesquisa/calcularSaudeMental")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Dados de Saúde Mental:", data);
-        if (data && Array.isArray(data)) {
-          // Inicializa o total de respostas como 0
-          let totalRespostas = 0;
-
-          // Faz o cálculo das porcentagens
-          const excelente = data.find(
-            (item) => item.saude_mental === "excelente"
-          );
-          const boa = data.find((item) => item.saude_mental === "boa");
-          const regular = data.find((item) => item.saude_mental === "regular");
-
-          // Converte as porcentagens para número e soma
-          const excelentePorcentagem = excelente
-            ? parseFloat(excelente.porcentagem)
-            : 0;
-          const boaPorcentagem = boa ? parseFloat(boa.porcentagem) : 0;
-          const regularPorcentagem = regular
-            ? parseFloat(regular.porcentagem)
-            : 0;
-
-          // Soma as porcentagens
-          totalRespostas =
-            excelentePorcentagem + boaPorcentagem + regularPorcentagem;
-
-          // Verifique se o total é um número válido antes de chamar toFixed()
-          if (!isNaN(totalRespostas)) {
-            // Atualiza o KPI na interface
-            document.getElementById(
-              "saude-mental"
-            ).textContent = `${totalRespostas.toFixed(2)}%`;
-          } else {
-            console.error(
-              "Erro ao calcular total de saúde mental, valor inválido:",
-              totalRespostas
-            );
-          }
-        } else {
-          console.error(
-            "Erro ao carregar dados de saúde mental: dados inesperados",
-            data
-          );
-        }
-      })
-      .catch((error) =>
-        console.log("Erro ao carregar dados de saúde mental:", error)
-      );
-
-    // Requisição para atividade física
-    fetch("/pesquisa/atividadeFisica")
-      .then((response) => response.json())
-      .then((data) => {
-        // Cria um conjunto padrão de categorias
-        const categorias = [
-          { label: "Diariamente", value: 0 },
-          { label: "Semanalmente", value: 0 },
-          { label: "Ocasionalmente", value: 0 },
-          { label: "Raramente", value: 0 },
-          { label: "Nunca", value: 0 },
-        ];
-
-        // Mapeia os dados retornados para as categorias
-        if (Array.isArray(data)) {
-          data.forEach((item) => {
-            const categoria = categorias.find(
-              (cat) =>
-                cat.label.toLowerCase() === item.atividade_fisica.toLowerCase()
-            );
-            if (categoria) {
-              categoria.value = item.quantidade || 0;
-            }
-          });
-        } else {
-          console.error("Erro ao carregar dados de atividade física:", data);
-          return;
+       
+        for (var i = 0; i < data.length; i++) {
+          totalPorcentagem += parseFloat(data[i].porcentagem) || 0;
         }
 
-        // Plota o gráfico de pizza com os dados
-        plotarGraficoPizza(
-          categorias,
-          "graficoAtividadeFisica",
-          "Frequência de Atividade Física"
-        );
+        
+        document.getElementById(
+          "atividade-fisica"
+        ).textContent = `${totalPorcentagem.toFixed(0)}%`;
       })
-      .catch((error) =>
-        console.error("Erro ao carregar dados de atividade física:", error)
-      );
-
-    // Requisição para alimentação
-    fetch("/pesquisa/alimentacao")
-      .then((response) => response.json())
-      .then((data) => {
-        // Cria um conjunto padrão de categorias
-        const categorias = [
-          { label: "saudavel", value: 0 },
-          { label: "balanceada", value: 0 },
-          { label: "desregrada", value: 0 },
-          { label: "vegetariana", value: 0 },
-        ];
-
-        // Mapeia os dados retornados para as categorias
-        if (Array.isArray(data)) {
-          data.forEach((item) => {
-            const categoria = categorias.find(
-              (cat) =>
-                cat.label.toLowerCase() === item.alimentacao.toLowerCase()
-            );
-            if (categoria) {
-              categoria.value = item.quantidade || 0;
-            }
-          });
-        } else {
-          console.error("Erro ao carregar dados de alimentação:", data);
-          return;
-        }
-
-        // Plota o gráfico de pizza com os dados
-        plotarGraficoPizza(
-          categorias,
-          "graficoAlimentacao",
-          "Qualidade da Alimentação"
-        );
-      })
-      .catch((error) =>
-        console.error("Erro ao carregar dados de alimentação:", error)
-      );
-
-    // Requisição para correlação entre sono e estresse
-    fetch("/pesquisa/sonoxEstresse")
-      .then((response) => response.json())
-      .then((data) => {
-        if (data && Array.isArray(data)) {
-          const correlacaoSonoEstresse = data.map((item) => ({
-            x: item.sono,
-            y: item.nivel_estresse,
-            quantidade: item.quantidade,
-          }));
-
-          plotarGraficoScatter(
-            correlacaoSonoEstresse,
-            "graficoSonoxEstresse",
-            "Horas de Sono vs. Nível de Estresse"
-          );
-        } else {
-          console.error(
-            "Erro ao carregar dados de correlação sono-estresse:",
-            data
-          );
-        }
-      })
-      .catch((error) =>
-        console.error(
-          "Erro ao carregar dados de correlação sono-estresse:",
-          error
-        )
-      );
-
-    // Requisição para saúde mental vs estresse
-    fetch("/pesquisa/sonoSaudeMental")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data); // Verifique se os dados estão sendo carregados corretamente
-        if (data && Array.isArray(data)) {
-          const sonoSaudeMental = data.map((item) => ({
-            saude_mental: item.saude_mental,
-            sono: item.sono,
-            quantidade: item.quantidade,
-          }));
-
-          // Chama a função para desenhar o gráfico de dispersão
-          plotarGraficoDispersao(
-            sonoSaudeMental,
-            "graficoSonoSaudeMental", // ID do canvas
-            "Sono x Saúde Mental" // Título do gráfico
-          );
-        } else {
-          console.error("Erro ao carregar dados de sono x saúde mental:", data);
-        }
-      })
-      .catch((error) => {
-        console.error("Erro ao carregar dados de sono x saúde mental:", error);
+      .catch(function (error) {
+        console.log("Erro ao carregar response de atividade física:", error);
       });
 
-    // Requisição para objetivos de saúde
-    fetch("/pesquisa/objetivoSaude")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Dados recebidos de objetivos de saúde:", data); // Verifique a resposta da API
-        if (data && Array.isArray(data)) {
-          const objetivosSaude = data.map((item) => ({
-            label: item.objetivos_saude,
-            value: item.quantidade,
-          }));
-          plotarGraficoBarras(
-            objetivosSaude,
-            "graficoObjetivosSaude", // ID do canvas
-            "Objetivos de Saúde" // Título do gráfico
-          );
-        } else {
-          console.error("Erro ao carregar dados de objetivos de saúde:", data);
-        }
+    
+    fetch("/pesquisa/calcularSaudeMental")
+      .then(function (response) {
+        return response.json();
       })
-      .catch((error) =>
-        console.log("Erro ao carregar dados de objetivos de saúde:", error)
-      );
+      .then(function (data) {
+        let totalPorcentagem = 0;
+
+        
+        for (let i = 0; i < data.length; i++) {
+          totalPorcentagem += parseFloat(data[i].porcentagem) || 0;
+        }
+
+        
+        document.getElementById(
+          "saude-mental"
+        ).textContent = `${totalPorcentagem.toFixed(0)}%`;
+      })
+      .catch(function (error) {
+        console.log("Erro ao carregar response de saúde mental:", error);
+      });
+
+    
+    fetch("/pesquisa/atividadeFisica")
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (response) {
+        plotarGraficoAtividadeFisica(response);
+      })
+      .catch(function (err) {
+        console.log("Erro ao carregar response de atividade física:", err);
+      });
+
+    
+    fetch("/pesquisa/alimentacao")
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (response) {
+        plotarGraficoAlimentacao(response);
+      })
+      .catch(function (err) {
+        console.log("Erro ao carregar response de alimentação:", err);
+      });
+
+    
+    fetch("/pesquisa/sonoxEstresse")
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (response) {
+        plotarGraficoSonoxEstresse(response);
+      })
+      .catch(function (err) {
+        console.log("Erro ao carregar response de sono x estresse:", err);
+      });
+
+    
+    fetch("/pesquisa/sonoSaudeMental")
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (response) {
+        plotarGraficoSonoSaudeMental(response);
+      })
+      .catch(function (err) {
+        console.log("Erro ao carregar response de sono x saúde mental:", err);
+      });
+
+    
+    fetch("/pesquisa/objetivoSaude")
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (response) {
+        plotarGraficoObjetivosSaude(response);
+      })
+      .catch(function (err) {
+        console.log("Erro ao carregar response de objetivos de saúde:", err);
+      });
   }
 
-  // Função para destruir o gráfico anterior e criar um novo
-  function destruirGrafico(canvasId) {
-    const canvas = document.getElementById(canvasId);
-    if (canvas && canvas.chart) {
-      canvas.chart.destroy();
-    }
-  }
+  function plotarGraficoAtividadeFisica(response) {
+    var categorias = [
+      "diariamente",
+      "semanalmente",
+      "ocasionalmente",
+      "raramente",
+      "nunca",
+    ];
+    var valores = [0, 0, 0, 0, 0];
 
-  // Função para plotar gráfico de pizza
-  function plotarGraficoPizza(data, canvasId, titulo) {
-    destruirGrafico(canvasId); // Destrói o gráfico anterior, se existir
-    const canvas = document.getElementById(canvasId);
-    if (!canvas) {
-      console.error(`Canvas com id ${canvasId} não encontrado.`);
-      return;
+    for (var i = 0; i < response.length; i++) {
+      var index = categorias.indexOf(response[i].atividade_fisica);
+      if (index !== -1) {
+        valores[index] += response[i].quantidade;
+      }
     }
-    const ctx = canvas.getContext("2d");
-    const chart = new Chart(ctx, {
+
+    var ctx = document
+      .getElementById("graficoAtividadeFisica")
+      .getContext("2d");
+    new Chart(ctx, {
       type: "pie",
       data: {
-        labels: data.map((item) => item.label),
+        labels: categorias,
         datasets: [
           {
-            data: data.map((item) => item.value),
+            data: valores,
             backgroundColor: [
-              "#ff6384",
-              "#36a2eb",
-              "#ffcd56",
-              "#4bc0c0",
-              "#9966ff",
+              "#FF6384",
+              "#36A2EB",
+              "#FFCE56",
+              "#4BC0C0",
+              "#9966FF",
             ],
           },
         ],
       },
-      options: {
-        responsive: true,
-        plugins: {
-          tooltip: {
-            callbacks: {
-              label: function (tooltipItem) {
-                return `${tooltipItem.label}: ${tooltipItem.raw}`;
-              },
-            },
-          },
-          legend: { position: "top" },
-        },
-      },
     });
-    canvas.chart = chart; // Salva a referência do gráfico no canvas
   }
 
-  // Função para plotar gráfico de dispersão
-  function plotarGraficoScatter(data, canvasId, titulo) {
-    destruirGrafico(canvasId); // Destrói o gráfico anterior, se existir
-    const canvas = document.getElementById(canvasId);
-    if (!canvas) {
-      console.error(`Canvas com id ${canvasId} não encontrado.`);
-      return;
+  function plotarGraficoAlimentacao(response) {
+    var categorias = ["saudavel", "balanceada", "desregrada", "vegetariana"];
+    var valores = [0, 0, 0, 0];
+
+    for (var i = 0; i < response.length; i++) {
+      var index = categorias.indexOf(response[i].alimentacao.toLowerCase());
+      if (index !== -1) {
+        valores[index] += response[i].quantidade;
+      }
     }
 
-    const ctx = canvas.getContext("2d");
-
-    const chartData = {
-      datasets: [
-        {
-          label: titulo,
-          data: data,
-          backgroundColor: "rgba(75, 192, 192, 0.2)",
-          borderColor: "rgba(75, 192, 192, 1)",
-          borderWidth: 1,
-          pointRadius: data.map((item) => item.quantidade * 5), // Tamanho dos pontos com base na quantidade
-        },
-      ],
-    };
-
-    const config = {
-      type: "scatter",
-      data: chartData,
-      options: {
-        responsive: true,
-        scales: {
-          x: {
-            title: {
-              display: true,
-              text: "Horas de Sono",
-            },
-          },
-          y: {
-            type: "category", // Eixo categórico
-            labels: ["Baixo", "Moderado", "Alto"], // Rótulos do eixo Y
-            title: {
-              display: true,
-              text: "Nível de Estresse",
-            },
-          },
-        },
-      },
-    };
-
-    // Criando o gráfico
-    new Chart(ctx, config);
-  }
-
-  // Função para plotar gráfico de barras
-  function plotarGraficoBarra(data, canvasId, titulo) {
-    destruirGrafico(canvasId); // Destrói o gráfico anterior, se existir
-    const canvas = document.getElementById(canvasId);
-    if (!canvas) {
-      console.error(`Canvas com id ${canvasId} não encontrado.`);
-      return;
-    }
-    const ctx = canvas.getContext("2d");
-    const chart = new Chart(ctx, {
-      type: "bar",
+    var ctx = document.getElementById("graficoAlimentacao").getContext("2d");
+    new Chart(ctx, {
+      type: "pie",
       data: {
-        labels: data.map((item) => item.label),
+        labels: categorias,
         datasets: [
           {
-            label: titulo,
-            data: data.map((item) => item.value),
-            backgroundColor: "#36a2eb",
+            data: valores,
+            backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0"],
+          },
+        ],
+      },
+    });
+  }
+
+  function plotarGraficoSonoxEstresse(response) {
+    var pontos = [];
+
+    // Mapear os níveis de estresse para valores numéricos
+    var nivelEstresseMap = {
+      baixo: 1,
+      moderado: 2,
+      alto: 3,
+    };
+
+    for (var i = 0; i < response.length; i++) {
+      // Converte o nível de estresse para valor numérico
+      var estresseValue =
+        nivelEstresseMap[response[i].nivel_estresse.toLowerCase()] || 0;
+      pontos.push({ x: response[i].sono, y: estresseValue });
+    }
+
+    var ctx = document.getElementById("graficoSonoxEstresse").getContext("2d");
+    new Chart(ctx, {
+      type: "scatter",
+      data: {
+        datasets: [
+          {
+            label: "Sono x Estresse",
+            data: pontos,
+            backgroundColor: "#FF6384",
           },
         ],
       },
       options: {
-        responsive: true,
+        scales: {
+          x: { title: { display: true, text: "Horas de Sono" } },
+          y: {
+            title: { display: true, text: "Nível de Estresse"},
+            min: -1,
+            max: 5,
+          },
+        },
+      },
+    });
+  }
+
+  function plotarGraficoSonoSaudeMental(response) {
+    var pontos = [];
+
+    // Mapear os níveis de saúde mental para valores numéricos
+    var saudeMental = {
+      excelente: 5,
+      regular: 3,
+      fraca: 1,
+    };
+
+    for (var i = 0; i < response.length; i++) {
+      // Converte o nível de saúde mental para valor numérico
+      var saudeMentalValue =
+        saudeMental[response[i].saude_mental.toLowerCase()] || 0;
+      pontos.push({ x: response[i].sono, y: saudeMentalValue });
+    }
+
+    var ctx = document
+      .getElementById("graficoSonoSaudeMental")
+      .getContext("2d");
+    new Chart(ctx, {
+      type: "scatter",
+      data: {
+        datasets: [
+          {
+            label: "Sono x Saúde Mental",
+            data: pontos,
+            backgroundColor: "#36A2EB",
+          },
+        ],
+      },
+      options: {
+        scales: {
+          x: { title: { display: true, text: "Horas de Sono" } },
+          y: { title: { display: true, text: "Saúde Mental" }, min: -1, max: 6},
+        },
+      },
+    });
+  }
+
+  function plotarGraficoObjetivosSaude(response) {
+    var labels = [];
+    var valores = [];
+
+    for (var i = 0; i < response.length; i++) {
+      labels.push(response[i].objetivos_saude);
+      valores.push(response[i].quantidade);
+    }
+
+    var ctx = document.getElementById("graficoObjetivosSaude").getContext("2d");
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Quantidade",
+            data: valores,
+            backgroundColor: "#FFCE56",
+          },
+        ],
+      },
+      options: {
         scales: {
           y: { beginAtZero: true },
         },
-        plugins: {
-          tooltip: {
-            callbacks: {
-              label: function (tooltipItem) {
-                return `${tooltipItem.label}: ${tooltipItem.raw}`;
-              },
-            },
-          },
-        },
       },
     });
-    canvas.chart = chart; // Salva a referência do gráfico no canvas
-  }
-
-  function plotarGraficoBarras(dados, idCanvas, titulo) {
-    const ctx = document.getElementById(idCanvas).getContext("2d");
-    if (!ctx) {
-      console.error(`Canvas com id ${idCanvas} não encontrado.`);
-      return;
-    }
-
-    // Criar o gráfico de barras
-    new Chart(ctx, {
-      type: "bar", // Alterado para 'bar' para gráficos de barras
-      data: {
-        labels: dados.map((item) => item.label), // As opções dos objetivos de saúde
-        datasets: [
-          {
-            label: titulo, // Título do gráfico
-            data: dados.map((item) => item.value), // Valores para cada objetivo
-            backgroundColor: "#36A2EB", // Cor das barras
-            borderColor: "#2196F3", // Cor da borda das barras
-            borderWidth: 1,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true, // Garantir que o eixo Y comece no zero
-          },
-        },
-        plugins: {
-          title: {
-            display: true,
-            text: titulo, // Mostrar título do gráfico
-          },
-          legend: {
-            display: false, // Opcional: esconder a legenda
-          },
-        },
-      },
-    });
-  }
-
-  function plotarGraficoDispersao(data, canvasId, titulo) {
-    const ctx = document.getElementById(canvasId).getContext("2d");
-
-    const chartData = {
-      datasets: [
-        {
-          label: titulo,
-          data: data.map((item) => {
-            let yValue;
-            if (item.saude_mental === "excelente") {
-              yValue = 1;
-            } else if (item.saude_mental === "boa") {
-              yValue = 2;
-            } else if (item.saude_mental === "regular") {
-              yValue = 3;
-            } else {
-              yValue = 4; // Para qualquer outro caso
-            }
-            return {
-              x: item.sono,
-              y: yValue, // Transformando a categoria em números
-              r: item.quantidade * 5, // O tamanho do ponto depende da quantidade
-            };
-          }),
-          backgroundColor: "rgba(75, 192, 192, 0.2)",
-          borderColor: "rgba(75, 192, 192, 1)",
-          borderWidth: 1,
-        },
-      ],
-    };
-
-    const config = {
-      type: "bubble", // Usando um gráfico de bolhas
-      data: chartData,
-      options: {
-        responsive: true,
-        scales: {
-          x: {
-            title: {
-              display: true,
-              text: "Horas de Sono",
-            },
-          },
-          y: {
-            title: {
-              display: true,
-              text: "Saúde Mental",
-            },
-            ticks: {
-              callback: function (value) {
-                if (value === 1) return "Excelente";
-                if (value === 2) return "Boa";
-                if (value === 3) return "Regular";
-                return "Fraca";
-              },
-            },
-          },
-        },
-      },
-    };
-
-    // Criando o gráfico
-    new Chart(ctx, config);
   }
 </script>
