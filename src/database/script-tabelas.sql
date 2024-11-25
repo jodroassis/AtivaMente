@@ -18,14 +18,15 @@ CREATE TABLE usuario (
     cpf char(11),
 	senha VARCHAR(50)
 );
-
-CREATE TABLE artigo (
+    
+CREATE TABLE comentario (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	titulo VARCHAR(100),
 	descricao VARCHAR(250),
     dtHora datetime,
 	fk_usuario INT,
-	FOREIGN KEY (fk_usuario) REFERENCES usuario(id)
+	FOREIGN KEY (fk_usuario) REFERENCES usuario(id),
+    artigo INT
 );	
 
 create table pesquisa (
@@ -41,7 +42,3 @@ create table pesquisa (
     saude_mental varchar(45),
     objetivos_saude varchar(45),
     nivel_estresse varchar(45));
-    
-    select * from pesquisa;
-    select * from usuario;
-    select * from artigo;
