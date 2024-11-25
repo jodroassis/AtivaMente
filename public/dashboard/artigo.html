@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/dashboards.css">
 </head>
-<body onload="validarSessao(), atualizarFeed()">
+<body onload="validarSessao(), atualizarFeed(1)">
     <div class="header">
         <div class="container">
             <div class="logo">
@@ -150,11 +150,13 @@
     function publicar() {
         var idUsuario = sessionStorage.ID_USUARIO;
         var cpf = sessionStorage.CPF_USUARIO;
+        var idArtigo = 1
 
         var corpo = {
             titulo: form_postagem.titulo.value,
             descricao: form_postagem.descricao.value,
-            dataHora: new Date().toISOString() // pega a data e o horário no formato BD (AAAA-MM-DD HH-MM-SS)
+            dataHora: new Date().toISOString(),// pega a data e o horário no formato BD (AAAA-MM-DD HH-MM-SS)
+            idArtigo: idArtigo
         }
 
         fetch(`/artigo/publicar/${idUsuario}`, {
@@ -186,17 +188,17 @@
 
     }
 
-    function editar(idArtigo) {
-        sessionStorage.ID_POSTAGEM_EDITANDO = idArtigo;
-        console.log("cliquei em editar - " + idArtigo);
-        window.alert("Você será redirecionado à página de edição do comentário de id número: " + idArtigo);
+    function editar(idComentario) {
+        sessionStorage.ID_POSTAGEM_EDITANDO = idComentario;
+        console.log("cliquei em editar - " + idComentario);
+        window.alert("Você será redirecionado à página de edição do comentário de id número: " + idComentario);
         window.location = "/dashboard/edicao-aviso.html"
 
     }
 
-    function deletar(idArtigo) {
-        console.log("Criar função de apagar post escolhido - ID" + idArtigo);
-        fetch(`/artigo/deletar/${idArtigo}`, {
+    function deletar(idComentario) {
+        console.log("Criar função de apagar post escolhido - ID" + idComentario);
+        fetch(`/artigo/deletar/${idComentario}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
@@ -216,8 +218,8 @@
         });
     }
 
-    function atualizarFeed() {
-        fetch("/artigo/listar").then(function (resposta) {
+    function atualizarFeed(idArtigo) {
+        fetch(`/artigo/comentarios/${idArtigo}`).then(function (resposta) {
             if (resposta.ok) {
                 if (resposta.status == 204) {
                     var feed = document.getElementById("feed_container");
@@ -234,6 +236,7 @@
                     feed.innerHTML = "";
                     for (let i = 0; i < resposta.length; i++) {
                         var publicacao = resposta[i];
+                        console.log(publicacao)
 
                         // criando e manipulando elementos do HTML via JavaScript
                         var divPublicacao = document.createElement("div");
@@ -258,7 +261,7 @@
                         btnDeletar.innerHTML = "Deletar";
 
                         divPublicacao.className = "publicacao";
-                        spanTitulo.id = "inputNumero" + publicacao.idArtigo;
+                        spanTitulo.id = "inputNumero" + publicacao.idComentario;
                         spanNome.className = "publicacao-nome";
                         spanTitulo.className = "publicacao-titulo";
                         divDescricao.className = "publicacao-descricao";
@@ -266,12 +269,12 @@
                         divButtons.className = "div-buttons"
 
                         btnEditar.className = "publicacao-btn-editar"
-                        btnEditar.id = "btnEditar" + publicacao.idArtigo;
-                        btnEditar.setAttribute("onclick", `editar(${publicacao.idArtigo})`);
+                        btnEditar.id = "btnEditar" + publicacao.idComentario;
+                        btnEditar.setAttribute("onclick", `editar(${publicacao.idComentario})`);
 
                         btnDeletar.className = "publicacao-btn-editar"
-                        btnDeletar.id = "btnDeletar" + publicacao.idArtigo;
-                        btnDeletar.setAttribute("onclick", `deletar(${publicacao.idArtigo})`);
+                        btnDeletar.id = "btnDeletar" + publicacao.idComentario;
+                        btnDeletar.setAttribute("onclick", `deletar(${publicacao.idComentario})`);
 
                         divPublicacao.appendChild(spanID);
                         divPublicacao.appendChild(spanNome);
@@ -294,5 +297,84 @@
             finalizarAguardar();
         });
     }
+
+    // function atualizarFeed(idArtigo) {
+    //     fetch(`/artigo/listar/${idArtigo}`).then(function (resposta) {
+    //         if (resposta.ok) {
+    //             if (resposta.status == 204) {
+    //                 var feed = document.getElementById("feed_container");
+    //                 var mensagem = document.createElement("span");
+    //                 mensagem.innerHTML = "Nenhum resultado encontrado."
+    //                 feed.appendChild(mensagem);
+    //                 throw "Nenhum resultado encontrado!!";
+    //             }
+
+    //             resposta.json().then(function (resposta) {
+    //                 console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+    //                 var feed = document.getElementById("feed_container");
+    //                 feed.innerHTML = "";
+    //                 for (let i = 0; i < resposta.length; i++) {
+    //                     var publicacao = resposta[i];
+
+    //                     // criando e manipulando elementos do HTML via JavaScript
+    //                     var divPublicacao = document.createElement("div");
+    //                     var spanID = document.createElement("span");
+    //                     var spanTitulo = document.createElement("span");
+    //                     var spanNome = document.createElement("span");
+    //                     var divDescricao = document.createElement("div");
+    //                     var spanDataHora = document.createElement("span");
+    //                     var divButtons = document.createElement("div");
+    //                     var btnEditar = document.createElement("button");
+    //                     var btnDeletar = document.createElement("button");
+
+    //                     const data = new Date(publicacao.dtHora);
+    //                     const dataFormatada = data.toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
+
+    //                     // spanID.innerHTML = "ID: <b>" + publicacao.idArtigo + "</b>";
+    //                     spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
+    //                     spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
+    //                     divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
+    //                     spanDataHora.innerHTML = "Data e Hora: <b>" + dataFormatada + "</b>";
+    //                     btnEditar.innerHTML = "Editar";
+    //                     btnDeletar.innerHTML = "Deletar";
+
+    //                     divPublicacao.className = "publicacao";
+    //                     spanTitulo.id = "inputNumero" + publicacao.idArtigo;
+    //                     spanNome.className = "publicacao-nome";
+    //                     spanTitulo.className = "publicacao-titulo";
+    //                     divDescricao.className = "publicacao-descricao";
+
+    //                     divButtons.className = "div-buttons"
+
+    //                     btnEditar.className = "publicacao-btn-editar"
+    //                     btnEditar.id = "btnEditar" + publicacao.idArtigo;
+    //                     btnEditar.setAttribute("onclick", `editar(${publicacao.idArtigo})`);
+
+    //                     btnDeletar.className = "publicacao-btn-editar"
+    //                     btnDeletar.id = "btnDeletar" + publicacao.idArtigo;
+    //                     btnDeletar.setAttribute("onclick", `deletar(${publicacao.idArtigo})`);
+
+    //                     divPublicacao.appendChild(spanID);
+    //                     divPublicacao.appendChild(spanNome);
+    //                     divPublicacao.appendChild(spanTitulo);
+    //                     divPublicacao.appendChild(spanDataHora);
+    //                     divPublicacao.appendChild(divDescricao);
+    //                     divPublicacao.appendChild(divButtons);
+    //                     divButtons.appendChild(btnEditar);
+    //                     divButtons.appendChild(btnDeletar);
+    //                     feed.appendChild(divPublicacao);
+    //                 }
+
+    //                 finalizarAguardar();
+    //             });
+    //         } else {
+    //             throw ('Houve um erro na API!');
+    //         }
+    //     }).catch(function (resposta) {
+    //         console.error(resposta);
+    //         finalizarAguardar();
+    //     });
+    // }
 
 </script>

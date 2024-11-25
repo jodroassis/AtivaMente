@@ -65,7 +65,26 @@ function listarPorUsuario(idUsuario) {
     return database.executar(instrucaoSql);
 }
 
-function publicar(titulo, descricao, idUsuario) {
+function listarComentariosPorArtigo(idArtigo) {
+    console.log("ACESSEI O MODELO listarComentariosPorArtigo()");
+    var instrucaoSql = `
+        SELECT 
+            c.id as idComentario,
+            c.titulo,
+            c.descricao,
+            c.dtHora,
+            c.fk_usuario,
+            u.nome AS nomeUsuario,
+            c.artigo AS idArtigo
+        FROM comentario as c
+        JOIN usuario as u ON c.fk_usuario = u.id
+        WHERE c.artigo = ${idArtigo};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function publicar(titulo, descricao, idUsuario, idArtigo) {
     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function publicar(): ", titulo, descricao,  idUsuario);
     // Obter a data atual com fuso horário de Brasília
     const dataBrasilia = new Date();
@@ -88,25 +107,25 @@ function publicar(titulo, descricao, idUsuario) {
     // Certifique-se de que a dataHoraBrasilia tenha o formato correto: YYYY-MM-DD HH:mm:ss
     console.log("Data e Hora formatada:", dataHoraBrasilia); // Para depuração
     var instrucaoSql = `
-        INSERT INTO artigo (titulo, descricao, dtHora, fk_usuario) VALUES ('${titulo}', '${descricao}', '${dataHoraBrasilia}', ${idUsuario});
+        INSERT INTO comentario (titulo, descricao, dtHora, fk_usuario, artigo) VALUES ('${titulo}', '${descricao}', '${dataHoraBrasilia}', ${idUsuario}, ${idArtigo});
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-function editar(novaDescricao, idArtigo) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function editar(): ", novaDescricao, idArtigo);
+function editar(novaDescricao, idComentario) {
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function editar(): ", novaDescricao, idComentario);
     var instrucaoSql = `
-        UPDATE artigo SET descricao = '${novaDescricao}' WHERE id = ${idArtigo};
+        UPDATE comentario SET descricao = '${novaDescricao}' WHERE id = ${idComentario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-function deletar(idArtigo) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", idArtigo);
+function deletar(idComentario) {
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", idComentario);
     var instrucaoSql = `
-        DELETE FROM artigo WHERE id = ${idArtigo};
+        DELETE FROM comentario WHERE id = ${idComentario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -115,6 +134,7 @@ function deletar(idArtigo) {
 module.exports = {
     listar,
     listarPorUsuario,
+    listarComentariosPorArtigo,
     pesquisarDescricao,
     publicar,
     editar,

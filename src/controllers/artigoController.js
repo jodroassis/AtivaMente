@@ -39,6 +39,25 @@ function listarPorUsuario(req, res) {
         );
 }
 
+function listarComentariosPorArtigo(req, res) {
+    var idArtigo = req.params.idArtigo;
+
+    artigoModel.listarComentariosPorArtigo(idArtigo)
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum comentário encontrado!");
+            }
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao buscar os comentários: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+
 function pesquisarDescricao(req, res) {
     var descricao = req.params.descricao;
 
@@ -64,6 +83,7 @@ function publicar(req, res) {
     var titulo = req.body.titulo;
     var descricao = req.body.descricao;
     var idUsuario = req.params.idUsuario;
+    var idArtigo = req.body.idArtigo;
 
     if (titulo == undefined) {
         res.status(400).send("O título está indefinido!");
@@ -71,8 +91,10 @@ function publicar(req, res) {
         res.status(400).send("A descrição está indefinido!");
     } else if (idUsuario == undefined) {
         res.status(403).send("O id do usuário está indefinido!");
+    } else if (!idArtigo) {
+        res.status(400).send("O id do artigo está indefinido!");
     } else {
-        artigoModel.publicar(titulo, descricao, idUsuario)
+        artigoModel.publicar(titulo, descricao, idUsuario, idArtigo)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -90,9 +112,9 @@ function publicar(req, res) {
 
 function editar(req, res) {
     var novaDescricao = req.body.descricao;
-    var idArtigo = req.params.idArtigo;
+    var idComentario = req.params.idComentario;
 
-    artigoModel.editar(novaDescricao, idArtigo)
+    artigoModel.editar(novaDescricao, idComentario)
         .then(
             function (resultado) {
                 res.json(resultado);
@@ -109,9 +131,9 @@ function editar(req, res) {
 }
 
 function deletar(req, res) {
-    var idArtigo = req.params.idArtigo;
+    var idComentario = req.params.idComentario;
 
-    artigoModel.deletar(idArtigo)
+    artigoModel.deletar(idComentario)
         .then(
             function (resultado) {
                 res.json(resultado);
@@ -137,6 +159,7 @@ function curtir(req, res) {
 module.exports = {
     listar,
     listarPorUsuario,
+    listarComentariosPorArtigo,
     pesquisarDescricao,
     publicar,
     editar,
