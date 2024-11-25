@@ -22,23 +22,35 @@
 <body onload="validarSessao(), listarInfosDeUm()" style="background-color: #161618;">
     <!-- <body onload="validarSessao()"> -->
 
-    <div class="janela">
-
-
-        <div class="header-left">
-
-            <h1>AquaTech</h1>
-
-            <div class="hello">
+        <div class="janela">
+            <div class="header-left">
+              <h1>AtivaMente</h1>
+      
+              <div class="hello">
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
                 <span id="mostrar_cpf"></span>
-            </div>
-
-            <div class="btn-logout" onclick="limparSessao()">
+              </div>
+      
+              <div class="btn-nav-white">
+                <a href="./home.html">
+                  <h3>Início</h3>
+                </a>
+              </div>
+      
+              <div class="btn-nav-white">
+                <a href="./pesquisa.html">
+                  <h3>Pesquisa</h3>
+                </a>
+              </div>
+      
+              <div class="btn-nav">
+                <h3>Gráficos</h3>
+              </div>
+      
+              <div class="btn-logout" onclick="limparSessao()">
                 <h3>Sair</h3>
+              </div>
             </div>
-
-        </div>
 
         <div class="dash-right">
 
@@ -96,10 +108,9 @@
                 descricao: textarea_descricao.value
             })
         }).then(function (resposta) {
-
             if (resposta.ok) {
                 window.alert("Post atualizado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
-                window.location = "/dashboard/artigo.html"
+                window.location = `/dashboard/artigo.html`
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
             } else {

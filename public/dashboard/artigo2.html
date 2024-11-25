@@ -126,7 +126,6 @@
 </html>
 
 <script>
-    // Função para incrementar as curtidas
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
     mostrar_cpf.innerHTML = sessionStorage.CPF_USUARIO;
 
@@ -142,7 +141,7 @@
         var corpo = {
             titulo: form_postagem.titulo.value,
             descricao: form_postagem.descricao.value,
-            dataHora: new Date().toISOString(),// pega a data e o horário no formato BD (AAAA-MM-DD HH-MM-SS)
+            dataHora: new Date().toISOString(),
             idArtigo: idArtigo
         }
 
@@ -239,7 +238,6 @@
                         const data = new Date(publicacao.dtHora);
                         const dataFormatada = data.toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
 
-                        // spanID.innerHTML = "ID: <b>" + publicacao.idArtigo + "</b>";
                         spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
                         spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
                         divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";

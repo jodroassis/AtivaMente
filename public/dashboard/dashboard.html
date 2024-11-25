@@ -250,7 +250,7 @@
     var valores = [0, 0, 0, 0, 0];
 
     for (var i = 0; i < response.length; i++) {
-      var index = categorias.indexOf(response[i].atividade_fisica);
+      var index = categorias.indexOf(response[i].atividade_fisica.toLowerCase());
       if (index !== -1) {
         valores[index] += response[i].quantidade;
       }
@@ -308,17 +308,15 @@
   function plotarGraficoSonoxEstresse(response) {
     var pontos = [];
 
-    // Mapear os níveis de estresse para valores numéricos
-    var nivelEstresseMap = {
+    var nivelEstresse = {
       baixo: 1,
       moderado: 2,
       alto: 3,
     };
 
     for (var i = 0; i < response.length; i++) {
-      // Converte o nível de estresse para valor numérico
       var estresseValue =
-        nivelEstresseMap[response[i].nivel_estresse.toLowerCase()] || 0;
+        nivelEstresse[response[i].nivel_estresse.toLowerCase()] || 0;
       pontos.push({ x: response[i].sono, y: estresseValue });
     }
 
