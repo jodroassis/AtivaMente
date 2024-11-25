@@ -3,11 +3,10 @@ function validarSessao() {
     var email = sessionStorage.EMAIL_USUARIO;
     var nome = sessionStorage.NOME_USUARIO;
     var cpf = sessionStorage.CPF_USUARIO;
-    var idArtigo = sessionStorage.ID_ARTIGO;
 
     var b_usuario = document.getElementById("b_usuario");
     var mostrar_cpf = document.getElementById("mostrar_cpf")
-    var idArtigo = document.getElementById("idArtigo")
+    var idComentario= document.getElementById("idComentario")
 
     if (email != null && nome != null) {
         b_usuario.innerHTML = nome;

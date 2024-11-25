@@ -1,4 +1,3 @@
-/* Reseta margens e paddings padrão */
 * {
     margin: 0;
     padding: 0;
@@ -6,20 +5,17 @@
     font-family: 'Exo 2', sans-serif;
   }
   
-  /* Configuração geral do body */
   body {
     background-color: #f3f4f6;
     color: #333;
     font-size: 16px;
   }
   
-  /* Container principal do dashboard */
   .janela {
     display: flex;
     height: 100vh;
   }
-  
-  /* Barra lateral */
+
   .header-left {
     display: flex;
     align-items: center;
@@ -112,7 +108,6 @@
     background-color: #d62828;
   }
   
-  /* Área do dashboard */
   .dash {
     flex: 1;
     padding: 30px;
@@ -129,7 +124,6 @@
     font-weight: bold;
   }
   
-  /* Indicadores principais */
   .kpis {
     display: flex;
     gap: 20px;
@@ -188,25 +182,5 @@
     display: flex;
     flex-direction: column;
     gap: 50px;
-  }
-  
-  /* Estilo para dispositivos menores */
-  @media (max-width: 768px) {
-    .janela {
-      flex-direction: column;
-    }
-  
-    .header-left {
-      width: 100%;
-      text-align: center;
-    }
-  
-    .dash {
-      padding: 20px;
-    }
-  
-    .kpis {
-      flex-direction: column;
-    }
   }
   

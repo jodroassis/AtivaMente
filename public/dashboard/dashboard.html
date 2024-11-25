@@ -144,7 +144,7 @@
 
        
         for (var i = 0; i < data.length; i++) {
-          totalPorcentagem += parseFloat(data[i].porcentagem) || 0;
+          totalPorcentagem += parseFloat(data[i].porcentagem);
         }
 
         
@@ -165,8 +165,8 @@
         let totalPorcentagem = 0;
 
         
-        for (let i = 0; i < data.length; i++) {
-          totalPorcentagem += parseFloat(data[i].porcentagem) || 0;
+        for (var i = 0; i < data.length; i++) {
+          totalPorcentagem += parseFloat(data[i].porcentagem);
         }
 
         
@@ -348,7 +348,6 @@
   function plotarGraficoSonoSaudeMental(response) {
     var pontos = [];
 
-    // Mapear os níveis de saúde mental para valores numéricos
     var saudeMental = {
       excelente: 5,
       regular: 3,
@@ -356,7 +355,6 @@
     };
 
     for (var i = 0; i < response.length; i++) {
-      // Converte o nível de saúde mental para valor numérico
       var saudeMentalValue =
         saudeMental[response[i].saude_mental.toLowerCase()] || 0;
       pontos.push({ x: response[i].sono, y: saudeMentalValue });

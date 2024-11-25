@@ -44,13 +44,12 @@
       <h2>Compartilhe seus hábitos e metas de bem-estar!</h2>
       <p>Queremos entender como você cuida da sua saúde e quais são seus objetivos de bem-estar. Com suas respostas,
         poderemos trazer conteúdos mais alinhados aos seus interesses.</p>
-      <!-- Idade -->
+
       <div class="campo">
         <label for="idade">Qual a sua idade?</label>
         <input type="number" id="idade" required>
       </div>
 
-      <!-- Frequência de Atividade Física -->
       <div class="campo">
         <label for="atividade_fisica">Com que frequência você pratica atividade física?</label>
         <select id="atividade_fisica" name="atividade_fisica" required>
@@ -62,7 +61,6 @@
         </select>
       </div>
 
-      <!-- Alimentação -->
       <div class="campo">
         <label for="alimentacao">Como você descreveria sua alimentação?</label>
         <select id="alimentacao" name="alimentacao" required>
@@ -72,13 +70,11 @@
         </select>
       </div>
 
-      <!-- Sono -->
       <div class="campo">
         <label for="sono">Quantas horas você costuma dormir por noite?</label>
         <input type="number" id="sono" name="sono" min="1" max="12" required>
       </div>
 
-      <!-- Saúde Mental -->
       <div class="campo">
         <label for="saude_mental">Como você descreveria sua saúde mental atualmente?</label>
         <select id="saude_mental" name="saude_mental" required>
@@ -88,7 +84,6 @@
         </select>
       </div>
 
-      <!-- Objetivos de Saúde -->
       <div class="campo">
         <label for="objetivos_saude">Quais são os seus principais objetivos de saúde?</label>
         <select id="objetivos_saude" name="objetivos_saude" required>
@@ -101,7 +96,6 @@
         </select>
       </div>
 
-      <!-- Nível de Estresse -->
       <div class="campo">
         <label for="nivel_estresse">Como você classificaria seu nível de estresse?</label>
         <select id="nivel_estresse" name="nivel_estresse" required>
@@ -111,7 +105,6 @@
         </select>
       </div>
 
-      <!-- Botão de Envio -->
       <button class="btn-formulario" onclick="cadastrar()">Enviar Respostas</button>
     </div>
   </div>
@@ -138,7 +131,6 @@
     var idUsuario = sessionStorage.ID_USUARIO;
     var cpf = sessionStorage.CPF_USUARIO;
 
-    // Coleta os dados do formulário
     var idadeVar = Number(idade.value);
     var atividade_fisicaVar = atividade_fisica.value;
     var alimentacaoVar = alimentacao.value;
@@ -147,8 +139,6 @@
     var objetivos_saudeVar = objetivos_saude.value;
     var nivel_estresseVar = nivel_estresse.value;
 
-
-    // Exibe no console para depuração
     console.log({
       idadeVar,
       atividade_fisicaVar,
@@ -179,7 +169,7 @@
               objetivos_saudeServer: objetivos_saudeVar,
               nivel_estresseServer: nivel_estresseVar,
               idUsuario_Server: sessionStorage.getItem("ID_USUARIO")
-            }) // Converte o objeto para JSON
+            })
           }).then(function (resposta) {
             if (resposta.ok) {
               alert("Pesquisa realizado com sucesso pelo usuario de ID: " + idUsuario + "!");

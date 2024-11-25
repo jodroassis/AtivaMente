@@ -224,24 +224,18 @@
                         var publicacao = resposta[i];
                         console.log(publicacao)
 
-                        // criando e manipulando elementos do HTML via JavaScript
                         var divPublicacao = document.createElement("div");
                         var spanID = document.createElement("span");
                         var spanTitulo = document.createElement("span");
                         var spanNome = document.createElement("span");
                         var divDescricao = document.createElement("div");
-                        var spanDataHora = document.createElement("span");
                         var divButtons = document.createElement("div");
                         var btnEditar = document.createElement("button");
                         var btnDeletar = document.createElement("button");
 
-                        const data = new Date(publicacao.dtHora);
-                        const dataFormatada = data.toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
-
                         spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
-                        spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
+                        spanNome.innerHTML = "Autor: <b>" + publicacao.nomeUsuario + "</b>";
                         divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
-                        spanDataHora.innerHTML = "Data e Hora: <b>" + dataFormatada + "</b>";
                         btnEditar.innerHTML = "Editar";
                         btnDeletar.innerHTML = "Deletar";
 
@@ -264,7 +258,6 @@
                         divPublicacao.appendChild(spanID);
                         divPublicacao.appendChild(spanNome);
                         divPublicacao.appendChild(spanTitulo);
-                        divPublicacao.appendChild(spanDataHora);
                         divPublicacao.appendChild(divDescricao);
                         divPublicacao.appendChild(divButtons);
                         divButtons.appendChild(btnEditar);

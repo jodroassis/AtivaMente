@@ -7,7 +7,6 @@ function listar() {
             a.id AS idArtigo,
             a.titulo,
             a.descricao,
-            a.dtHora,
             a.fk_usuario,
             u.id AS idUsuario,
             u.nome,
@@ -28,7 +27,6 @@ function pesquisarDescricao(texto) {
             a.id AS idArtigo,
             a.titulo,
             a.descricao,
-            a.dtHora,
             a.fk_usuario,
             u.id AS idUsuario,
             u.nome,
@@ -50,7 +48,6 @@ function listarPorUsuario(idUsuario) {
             a.id AS idArtigo,
             a.titulo,
             a.descricao,
-            a.dtHora,
             a.fk_usuario,
             u.id AS idUsuario,
             u.nome,
@@ -72,7 +69,6 @@ function listarComentariosPorArtigo(idArtigo) {
             c.id as idComentario,
             c.titulo,
             c.descricao,
-            c.dtHora,
             c.fk_usuario,
             u.nome AS nomeUsuario,
             c.artigo AS idArtigo
@@ -86,28 +82,8 @@ function listarComentariosPorArtigo(idArtigo) {
 
 function publicar(titulo, descricao, idUsuario, idArtigo) {
     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function publicar(): ", titulo, descricao,  idUsuario);
-    // Obter a data atual com fuso horário de Brasília
-    const dataBrasilia = new Date();
-
-    // Obter a data no formato YYYY-MM-DD
-    const ano = dataBrasilia.getFullYear();
-    const mes = String(dataBrasilia.getMonth() + 1).padStart(2, '0');
-    const dia = String(dataBrasilia.getDate()).padStart(2, '0');
-    const dataFormatada = `${ano}-${mes}-${dia}`;
-
-    // Obter a hora no formato HH:mm:ss
-    const hora = String(dataBrasilia.getHours()).padStart(2, '0');
-    const minutos = String(dataBrasilia.getMinutes()).padStart(2, '0');
-    const segundos = String(dataBrasilia.getSeconds()).padStart(2, '0');
-    const horaFormatada = `${hora}:${minutos}:${segundos}`;
-
-    // Combinar data e hora para o formato esperado pelo MySQL
-    const dataHoraBrasilia = `${dataFormatada} ${horaFormatada}`;
-
-    // Certifique-se de que a dataHoraBrasilia tenha o formato correto: YYYY-MM-DD HH:mm:ss
-    console.log("Data e Hora formatada:", dataHoraBrasilia); // Para depuração
     var instrucaoSql = `
-        INSERT INTO comentario (titulo, descricao, dtHora, fk_usuario, artigo) VALUES ('${titulo}', '${descricao}', '${dataHoraBrasilia}', ${idUsuario}, ${idArtigo});
+        INSERT INTO comentario (titulo, descricao, fk_usuario, artigo) VALUES ('${titulo}', '${descricao}', ${idUsuario}, ${idArtigo});
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

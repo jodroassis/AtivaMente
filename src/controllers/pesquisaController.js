@@ -2,7 +2,7 @@ var pesquisaModel = require("../models/pesquisaModel");
 
 function listar(req, res) {
     pesquisaModel.listar().then(function(resultado){
-        // precisamos informar que o resultado voltará para o front-end como uma resposta em json
+        
         res.status(200).json(resultado);
     }).catch(function(erro){
         res.status(500).json(erro.sqlMessage);
@@ -12,7 +12,6 @@ function listar(req, res) {
 function validarId(req, res) {
     var idUsuario = req.params.idUsuario;
     pesquisaModel.validarId(idUsuario).then(function(resultado){
-        // precisamos informar que o resultado voltará para o front-end como uma resposta em json
         res.status(200).json(resultado);
     }).catch(function(erro){
         res.status(500).json(erro.sqlMessage);
@@ -55,7 +54,6 @@ function buscarMedidasEmTempoReal(req, res) {
 
 function calcularIdadeMedia(req, res) {
     pesquisaModel.calcularIdadeMedia().then(function(resultado){
-        // precisamos informar que o resultado voltará para o front-end como uma resposta em json
         console.log(resultado)
         res.status(200).json(resultado);
         
@@ -66,7 +64,6 @@ function calcularIdadeMedia(req, res) {
 
 function calcularFrequenciaAtividade(req, res) {
     pesquisaModel.calcularFrequenciaAtividade().then(function(resultado){
-        // precisamos informar que o resultado voltará para o front-end como uma resposta em json
         res.status(200).json(resultado);
     }).catch(function(erro){
         res.status(500).json(erro.sqlMessage);
@@ -74,7 +71,6 @@ function calcularFrequenciaAtividade(req, res) {
 }
 function calcularSaudeMental(req, res) {
     pesquisaModel.calcularSaudeMental().then(function(resultado){
-        // precisamos informar que o resultado voltará para o front-end como uma resposta em json
         res.status(200).json(resultado);
     }).catch(function(erro){
         res.status(500).json(erro.sqlMessage);
@@ -82,7 +78,6 @@ function calcularSaudeMental(req, res) {
 }
 function atividadeFisica(req, res) {
     pesquisaModel.atividadeFisica().then(function(resultado){
-        // precisamos informar que o resultado voltará para o front-end como uma resposta em json
         res.status(200).json(resultado);
     }).catch(function(erro){
         res.status(500).json(erro.sqlMessage);
@@ -90,7 +85,6 @@ function atividadeFisica(req, res) {
 }
 function alimentacao(req, res) {
     pesquisaModel.alimentacao().then(function(resultado){
-        // precisamos informar que o resultado voltará para o front-end como uma resposta em json
         res.status(200).json(resultado);
     }).catch(function(erro){
         res.status(500).json(erro.sqlMessage);
@@ -98,7 +92,6 @@ function alimentacao(req, res) {
 }
 function sonoSaudeMental(req, res) {
     pesquisaModel.sonoSaudeMental().then(function(resultado){
-        // precisamos informar que o resultado voltará para o front-end como uma resposta em json
         res.status(200).json(resultado);
     }).catch(function(erro){
         res.status(500).json(erro.sqlMessage);
@@ -106,7 +99,6 @@ function sonoSaudeMental(req, res) {
 }
 function sonoxEstresse(req, res) {
     pesquisaModel.sonoxEstresse().then(function(resultado){
-        // precisamos informar que o resultado voltará para o front-end como uma resposta em json
         res.status(200).json(resultado);
     }).catch(function(erro){
         res.status(500).json(erro.sqlMessage);
@@ -144,10 +136,8 @@ function cadastrar(req, res) {
 }
 
 function obterDados(req, res) {
-    // Chama o model para obter os dados da pesquisa
     pesquisaModel.obterDados()
         .then(function(resultado) {
-            // Verifica se há resultados
             if (resultado.length > 0) {
                 // Envia os dados no formato JSON como resposta para o frontend
                 res.status(200).json(resultado);  // 200 OK com os dados
