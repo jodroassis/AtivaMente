@@ -326,7 +326,7 @@
 
     for (var i = 0; i < response.length; i++) {
       var estresse =
-        nivelEstresse[response[i].nivel_estresse.toLowerCase()];
+        nivelEstresse[response[i].nivel_estresse]  || 0;
       pontos.push({ x: response[i].sono, y: estresse});
     }
 
@@ -365,8 +365,7 @@
     };
 
     for (var i = 0; i < response.length; i++) {
-      var saudeMentalValor =
-        saudeMental[response[i].saude_mental] || 0;
+      var saudeMentalValor = saudeMental[response[i].saude_mental] || 0;
       pontos.push({ x: response[i].sono, y: saudeMentalValor});
     }
 
