@@ -260,8 +260,8 @@
     var valores = [0, 0, 0, 0, 0];
 
     for (var i = 0; i < response.length; i++) {
-      var index = categorias.indexOf(response[i].atividade_fisica.toLowerCase());
-      if (index !== -1) {
+      var index = categorias.indexOf(response[i].atividade_fisica);
+      if (index != -1) {
         valores[index] += response[i].quantidade;
       }
     }
@@ -325,9 +325,9 @@
     };
 
     for (var i = 0; i < response.length; i++) {
-      var estresseValue =
-        nivelEstresse[response[i].nivel_estresse.toLowerCase()] || 0;
-      pontos.push({ x: response[i].sono, y: estresseValue });
+      var estresse =
+        nivelEstresse[response[i].nivel_estresse.toLowerCase()];
+      pontos.push({ x: response[i].sono, y: estresse});
     }
 
     var ctx = document.getElementById("graficoSonoxEstresse").getContext("2d");
@@ -365,9 +365,9 @@
     };
 
     for (var i = 0; i < response.length; i++) {
-      var saudeMentalValue =
-        saudeMental[response[i].saude_mental.toLowerCase()] || 0;
-      pontos.push({ x: response[i].sono, y: saudeMentalValue });
+      var saudeMentalValor =
+        saudeMental[response[i].saude_mental] || 0;
+      pontos.push({ x: response[i].sono, y: saudeMentalValor});
     }
 
     var ctx = document
@@ -441,22 +441,22 @@
     regular: [0, 0, 0, 0],
   };
 
-  // Mapeia os valores retornados da API
   for (var i = 0; i < response.length; i++) {
-    var saudeMental = response[i].saude_mental.toLowerCase();
-    var alimentacao = response[i].alimentacao.toLowerCase();
+    var saudeMental = response[i].saude_mental;
+    console.log(saudeMental)
+    var alimentacao = response[i].alimentacao;
+    console.log(alimentacao)
     var porcentagem = parseFloat(response[i].porcentagem);
 
-    var saudeMentalGroup = valores[saudeMental];
-    if (saudeMentalGroup) {
+    var saudeMentalGrupo = valores[saudeMental];
+    if (saudeMentalGrupo) {
       var index = categorias.indexOf(alimentacao);
-      if (index !== -1) {
-        saudeMentalGroup[index] += porcentagem;
+      if (index != -1) {
+        saudeMentalGrupo[index] += porcentagem;
       }
     }
   }
 
-  // Criação do Gráfico
   var ctx = document
     .getElementById("graficoAlimentacaoSaudeMental")
     .getContext("2d");
@@ -511,22 +511,22 @@ function plotarGraficoTendenciaIdade(response) {
   var saudeMental = ["excelente", "regular", "fraca"];
 
   var dados = [];
-  for (var i = 0; i < categorias.length; i++) {
+  for (var a= 0; a < categorias.length; a++) {
     var valores = [];
-    for (var j = 0; j < saudeMental.length; j++) {
+    for (var b = 0; b < saudeMental.length; b++) {
       var quantidade = 0;
-      for (var k = 0; k < response.length; k++) {
+      for (var c = 0; c < response.length; c++) {
         if (
-          response[k].faixa_etaria == categorias[i] &&
-          response[k].saude_mental == saudeMental[j]
+          response[c].faixa_etaria == categorias[a] &&
+          response[c].saude_mental == saudeMental[b]
         ) {
-          quantidade = response[k].quantidade;
+          quantidade = response[c].quantidade;
           break;
         } 
       }
       valores.push(quantidade);
     }
-    dados.push({ categoria: categorias[i], valores });
+    dados.push({ categoria: categorias[a], valores });
   }
 
   var ctx = document.getElementById("graficoTendenciaIdade").getContext("2d");
