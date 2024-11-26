@@ -60,4 +60,14 @@ router.get("/obterDados", function (req, res) {
     pesquisaController.obterDados(req, res);
 });
 
+//NOVOS GRAFICOS
+router.get("/alimentacaoSaudeMental", function (req, res) {
+    // função a ser chamada quando acessar /pesquisa/alimentacaoSaudeMental
+    pesquisaController.alimentacaoSaudeMental(req, res);
+});
+
+router.get("/tendenciaPorIdade", function (req, res) {
+    pesquisaController.tendenciaPorIdade(req, res);
+  });
+  
 module.exports = router;

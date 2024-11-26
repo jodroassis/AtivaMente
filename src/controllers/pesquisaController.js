@@ -152,6 +152,43 @@ function obterDados(req, res) {
         });
 }
 
+function sonoxEstresse(req, res) {
+    pesquisaModel.sonoxEstresse().then(function(resultado){
+        res.status(200).json(resultado);
+    }).catch(function(erro){
+        res.status(500).json(erro.sqlMessage);
+    })
+}
+function objetivoSaude(req, res) {
+    pesquisaModel.objetivoSaude().then(function(resultado){
+        // precisamos informar que o resultado voltará para o front-end como uma resposta em json
+        res.status(200).json(resultado);
+    }).catch(function(erro){
+        res.status(500).json(erro.sqlMessage);
+    })
+}
+// NOVOS GRAFICOS
+
+function alimentacaoSaudeMental(req, res) {
+    pesquisaModel.alimentacaoSaudeMental().then(function(resultado){
+        // precisamos informar que o resultado voltará para o front-end como uma resposta em json
+        res.status(200).json(resultado);
+    }).catch(function(erro){
+        res.status(500).json(erro.sqlMessage);
+    })
+}
+
+function tendenciaPorIdade(req, res) {
+    pesquisaModel.tendenciaPorIdade()
+      .then(function (resultado) {
+        res.status(200).json(resultado);
+      })
+      .catch(function (erro) {
+        console.log("Erro ao buscar tendência por idade:", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+      });
+  }
+  
 module.exports = {
     obterDados,
     cadastrar,
@@ -165,5 +202,7 @@ module.exports = {
     objetivoSaude,
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
-    validarId
+    validarId,
+    alimentacaoSaudeMental,
+    tendenciaPorIdade
 }

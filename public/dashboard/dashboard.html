@@ -110,6 +110,16 @@
           <h3>Visualização de Objetivos de Saúde</h3>
           <canvas id="graficoObjetivosSaude"></canvas>
         </div>
+        <br>
+        <div>
+          <h3>Correlação Alimentação x Saúde Mental</h3>
+          <canvas id="graficoAlimentacaoSaudeMental"></canvas>
+        </div>
+        <br>
+        <div>
+          <h3>Tendência por Idade</h3>
+          <canvas id="graficoTendenciaIdade"></canvas>
+        </div>
       </div>
     </div>
   </body>
@@ -162,7 +172,7 @@
         return response.json();
       })
       .then(function (data) {
-        let totalPorcentagem = 0;
+        var totalPorcentagem = 0;
 
         
         for (var i = 0; i < data.length; i++) {
@@ -401,7 +411,7 @@
           {
             label: "Quantidade",
             data: valores,
-            backgroundColor: "#FFCE56",
+            backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#FF7514"],
           },
         ],
       },
@@ -412,4 +422,132 @@
       },
     });
   }
+
+  // NOVOS GRÁFICOS / IDEIAS
+  fetch("/pesquisa/alimentacaoSaudeMental")
+  .then((response) => response.json())
+  .then((response) => {
+    plotarGraficoAlimentacaoSaudeMental(response);
+  })
+  .catch((err) =>
+    console.log("Erro ao carregar alimentação x saúde mental:", err)
+  );
+
+  function plotarGraficoAlimentacaoSaudeMental(response) {
+  var categorias = ["saudavel", "balanceada", "desregrada", "vegetariana"];
+  var valores = {
+    excelente: [0, 0, 0, 0],
+    fraca: [0, 0, 0, 0],
+    regular: [0, 0, 0, 0],
+  };
+
+  // Mapeia os valores retornados da API
+  for (var i = 0; i < response.length; i++) {
+    var saudeMental = response[i].saude_mental.toLowerCase();
+    var alimentacao = response[i].alimentacao.toLowerCase();
+    var porcentagem = parseFloat(response[i].porcentagem);
+
+    var saudeMentalGroup = valores[saudeMental];
+    if (saudeMentalGroup) {
+      var index = categorias.indexOf(alimentacao);
+      if (index !== -1) {
+        saudeMentalGroup[index] += porcentagem;
+      }
+    }
+  }
+
+  // Criação do Gráfico
+  var ctx = document
+    .getElementById("graficoAlimentacaoSaudeMental")
+    .getContext("2d");
+
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: categorias,
+      datasets: [
+        {
+          label: "Excelente",
+          data: valores.excelente,
+          backgroundColor: "#36A2EB",
+        },
+        {
+          label: "Fraca",
+          data: valores.fraca,
+          backgroundColor: "#FF6384",
+        },
+        {
+          label: "Regular",
+          data: valores.regular,
+          backgroundColor: "#FFCE56",
+        },
+      ],
+    },
+    options: {
+      scales: {
+        x: {
+          title: { display: true, text: "Tipo de Alimentação" },
+        },
+        y: {
+          title: { display: true, text: "Porcentagem" },
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+}
+
+fetch("/pesquisa/tendenciaPorIdade")
+  .then((response) => response.json())
+  .then((response) => {
+    plotarGraficoTendenciaIdade(response);
+  })
+  .catch((err) => {
+    console.log("Erro ao carregar tendência por idade:", err);
+  });
+
+function plotarGraficoTendenciaIdade(response) {
+  var categorias = ["0-20", "21-40", "41-60", "61+"];
+  var saudeMental = ["excelente", "regular", "fraca"];
+
+  var dados = [];
+  for (var i = 0; i < categorias.length; i++) {
+    var valores = [];
+    for (var j = 0; j < saudeMental.length; j++) {
+      var quantidade = 0;
+      for (var k = 0; k < response.length; k++) {
+        if (
+          response[k].faixa_etaria == categorias[i] &&
+          response[k].saude_mental == saudeMental[j]
+        ) {
+          quantidade = response[k].quantidade;
+          break;
+        } 
+      }
+      valores.push(quantidade);
+    }
+    dados.push({ categoria: categorias[i], valores });
+  }
+
+  var ctx = document.getElementById("graficoTendenciaIdade").getContext("2d");
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: saudeMental,
+      datasets: dados.map((dado, index) => ({
+        label: dado.categoria,
+        data: dado.valores,
+        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0"][index],
+      })),
+    },
+    options: {
+      scales: {
+        x: { title: { display: true, text: "Saúde Mental" } },
+        y: { beginAtZero: true, title: { display: true, text: "Quantidade" } },
+      },
+    },
+  });
+}
+
+
 </script>
