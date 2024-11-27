@@ -31,7 +31,7 @@
     ></script>
   </head>
 
-  <body onload="obterresponse()">
+  <body onload="obterResposta()">
     <div class="janela">
       <div class="header-left">
         <h1>AtivaMente</h1>
@@ -130,10 +130,10 @@
   mostrar_cpf.innerHTML = sessionStorage.CPF_USUARIO;
 
 
-  function obterresponse() {
+  function obterResposta() {
     
     fetch("/pesquisa/calcularIdadeMedia")
-      .then((response) => response.json())
+      .then((resposta) => resposta.json())
       .then((data) => {
         var numeroInt = Number(data[0].idadeMedia);
         document.getElementById(
@@ -141,13 +141,13 @@
         ).textContent = `${numeroInt} anos`;
       })
       .catch((error) =>
-        console.log("Erro ao carregar response de idade média:", error)
+        console.log("Erro ao carregar resposta de idade média:", error)
       );
 
 
     fetch("/pesquisa/calcularFrequenciaAtividade")
-      .then(function (response) {
-        return response.json();
+      .then(function (resposta) {
+        return resposta.json();
       })
       .then(function (data) {
         var totalPorcentagem = 0;
@@ -163,13 +163,13 @@
         ).textContent = `${totalPorcentagem.toFixed(0)}%`;
       })
       .catch(function (error) {
-        console.log("Erro ao carregar response de atividade física:", error);
+        console.log("Erro ao carregar resposta de atividade física:", error);
       });
 
     
     fetch("/pesquisa/calcularSaudeMental")
-      .then(function (response) {
-        return response.json();
+      .then(function (resposta) {
+        return resposta.json();
       })
       .then(function (data) {
         var totalPorcentagem = 0;
@@ -185,71 +185,71 @@
         ).textContent = `${totalPorcentagem.toFixed(0)}%`;
       })
       .catch(function (error) {
-        console.log("Erro ao carregar response de saúde mental:", error);
+        console.log("Erro ao carregar resposta de saúde mental:", error);
       });
 
     
     fetch("/pesquisa/atividadeFisica")
-      .then(function (response) {
-        return response.json();
+      .then(function (resposta) {
+        return resposta.json();
       })
-      .then(function (response) {
-        plotarGraficoAtividadeFisica(response);
+      .then(function (resposta) {
+        plotarGraficoAtividadeFisica(resposta);
       })
       .catch(function (err) {
-        console.log("Erro ao carregar response de atividade física:", err);
+        console.log("Erro ao carregar resposta de atividade física:", err);
       });
 
     
     fetch("/pesquisa/alimentacao")
-      .then(function (response) {
-        return response.json();
+      .then(function (resposta) {
+        return resposta.json();
       })
-      .then(function (response) {
-        plotarGraficoAlimentacao(response);
+      .then(function (resposta) {
+        plotarGraficoAlimentacao(resposta);
       })
       .catch(function (err) {
-        console.log("Erro ao carregar response de alimentação:", err);
+        console.log("Erro ao carregar resposta de alimentação:", err);
       });
 
     
     fetch("/pesquisa/sonoxEstresse")
-      .then(function (response) {
-        return response.json();
+      .then(function (resposta) {
+        return resposta.json();
       })
-      .then(function (response) {
-        plotarGraficoSonoxEstresse(response);
+      .then(function (resposta) {
+        plotarGraficoSonoxEstresse(resposta);
       })
       .catch(function (err) {
-        console.log("Erro ao carregar response de sono x estresse:", err);
+        console.log("Erro ao carregar resposta de sono x estresse:", err);
       });
 
     
     fetch("/pesquisa/sonoSaudeMental")
-      .then(function (response) {
-        return response.json();
+      .then(function (resposta) {
+        return resposta.json();
       })
-      .then(function (response) {
-        plotarGraficoSonoSaudeMental(response);
+      .then(function (resposta) {
+        plotarGraficoSonoSaudeMental(resposta);
       })
       .catch(function (err) {
-        console.log("Erro ao carregar response de sono x saúde mental:", err);
+        console.log("Erro ao carregar resposta de sono x saúde mental:", err);
       });
 
     
     fetch("/pesquisa/objetivoSaude")
-      .then(function (response) {
-        return response.json();
+      .then(function (resposta) {
+        return resposta.json();
       })
-      .then(function (response) {
-        plotarGraficoObjetivosSaude(response);
+      .then(function (resposta) {
+        plotarGraficoObjetivosSaude(resposta);
       })
       .catch(function (err) {
-        console.log("Erro ao carregar response de objetivos de saúde:", err);
+        console.log("Erro ao carregar resposta de objetivos de saúde:", err);
       });
   }
 
-  function plotarGraficoAtividadeFisica(response) {
+  function plotarGraficoAtividadeFisica(resposta) {
     var categorias = [
       "diariamente",
       "semanalmente",
@@ -259,10 +259,10 @@
     ];
     var valores = [0, 0, 0, 0, 0];
 
-    for (var i = 0; i < response.length; i++) {
-      var index = categorias.indexOf(response[i].atividade_fisica);
+    for (var i = 0; i < resposta.length; i++) {
+      var index = categorias.indexOf(resposta[i].atividade_fisica);
       if (index != -1) {
-        valores[index] += response[i].quantidade;
+        valores[index] += resposta[i].quantidade;
       }
     }
 
@@ -289,14 +289,14 @@
     });
   }
 
-  function plotarGraficoAlimentacao(response) {
+  function plotarGraficoAlimentacao(resposta) {
     var categorias = ["saudavel", "balanceada", "desregrada", "vegetariana"];
     var valores = [0, 0, 0, 0];
 
-    for (var i = 0; i < response.length; i++) {
-      var index = categorias.indexOf(response[i].alimentacao.toLowerCase());
-      if (index !== -1) {
-        valores[index] += response[i].quantidade;
+    for (var i = 0; i < resposta.length; i++) {
+      var index = categorias.indexOf(resposta[i].alimentacao);
+      if (index != -1) {
+        valores[index] += resposta[i].quantidade;
       }
     }
 
@@ -315,7 +315,7 @@
     });
   }
 
-  function plotarGraficoSonoxEstresse(response) {
+  function plotarGraficoSonoxEstresse(resposta) {
     var pontos = [];
 
     var nivelEstresse = {
@@ -324,10 +324,10 @@
       alto: 3,
     };
 
-    for (var i = 0; i < response.length; i++) {
+    for (var i = 0; i < resposta.length; i++) {
       var estresse =
-        nivelEstresse[response[i].nivel_estresse]  || 0;
-      pontos.push({ x: response[i].sono, y: estresse});
+        nivelEstresse[resposta[i].nivel_estresse]  || 0;
+      pontos.push({ x: resposta[i].sono, y: estresse});
     }
 
     var ctx = document.getElementById("graficoSonoxEstresse").getContext("2d");
@@ -355,7 +355,7 @@
     });
   }
 
-  function plotarGraficoSonoSaudeMental(response) {
+  function plotarGraficoSonoSaudeMental(resposta) {
     var pontos = [];
 
     var saudeMental = {
@@ -364,9 +364,9 @@
       fraca: 1,
     };
 
-    for (var i = 0; i < response.length; i++) {
-      var saudeMentalValor = saudeMental[response[i].saude_mental] || 0;
-      pontos.push({ x: response[i].sono, y: saudeMentalValor});
+    for (var i = 0; i < resposta.length; i++) {
+      var saudeMentalValor = saudeMental[resposta[i].saude_mental] || 0;
+      pontos.push({ x: resposta[i].sono, y: saudeMentalValor});
     }
 
     var ctx = document
@@ -392,13 +392,13 @@
     });
   }
 
-  function plotarGraficoObjetivosSaude(response) {
+  function plotarGraficoObjetivosSaude(resposta) {
     var labels = [];
     var valores = [];
 
-    for (var i = 0; i < response.length; i++) {
-      labels.push(response[i].objetivos_saude);
-      valores.push(response[i].quantidade);
+    for (var i = 0; i < resposta.length; i++) {
+      labels.push(resposta[i].objetivos_saude);
+      valores.push(resposta[i].quantidade);
     }
 
     var ctx = document.getElementById("graficoObjetivosSaude").getContext("2d");
@@ -424,15 +424,15 @@
 
   // NOVOS GRÁFICOS / IDEIAS
   fetch("/pesquisa/alimentacaoSaudeMental")
-  .then((response) => response.json())
-  .then((response) => {
-    plotarGraficoAlimentacaoSaudeMental(response);
+  .then((resposta) => resposta.json())
+  .then((resposta) => {
+    plotarGraficoAlimentacaoSaudeMental(resposta);
   })
   .catch((err) =>
     console.log("Erro ao carregar alimentação x saúde mental:", err)
   );
 
-  function plotarGraficoAlimentacaoSaudeMental(response) {
+  function plotarGraficoAlimentacaoSaudeMental(resposta) {
   var categorias = ["saudavel", "balanceada", "desregrada", "vegetariana"];
   var valores = {
     excelente: [0, 0, 0, 0],
@@ -440,12 +440,12 @@
     regular: [0, 0, 0, 0],
   };
 
-  for (var i = 0; i < response.length; i++) {
-    var saudeMental = response[i].saude_mental;
+  for (var i = 0; i < resposta.length; i++) {
+    var saudeMental = resposta[i].saude_mental;
     console.log(saudeMental)
-    var alimentacao = response[i].alimentacao;
+    var alimentacao = resposta[i].alimentacao;
     console.log(alimentacao)
-    var porcentagem = parseFloat(response[i].porcentagem);
+    var porcentagem = parseFloat(resposta[i].porcentagem);
 
     var saudeMentalGrupo = valores[saudeMental];
     if (saudeMentalGrupo) {
@@ -497,15 +497,15 @@
 }
 
 fetch("/pesquisa/tendenciaPorIdade")
-  .then((response) => response.json())
-  .then((response) => {
-    plotarGraficoTendenciaIdade(response);
+  .then((resposta) => resposta.json())
+  .then((resposta) => {
+    plotarGraficoTendenciaIdade(resposta);
   })
   .catch((err) => {
     console.log("Erro ao carregar tendência por idade:", err);
   });
 
-function plotarGraficoTendenciaIdade(response) {
+function plotarGraficoTendenciaIdade(resposta) {
   var categorias = ["0-20", "21-40", "41-60", "61+"];
   var saudeMental = ["excelente", "regular", "fraca"];
 
@@ -514,12 +514,12 @@ function plotarGraficoTendenciaIdade(response) {
     var valores = [];
     for (var b = 0; b < saudeMental.length; b++) {
       var quantidade = 0;
-      for (var c = 0; c < response.length; c++) {
+      for (var c = 0; c < resposta.length; c++) {
         if (
-          response[c].faixa_etaria == categorias[a] &&
-          response[c].saude_mental == saudeMental[b]
+          resposta[c].faixa_etaria == categorias[a] &&
+          resposta[c].saude_mental == saudeMental[b]
         ) {
-          quantidade = response[c].quantidade;
+          quantidade = resposta[c].quantidade;
           break;
         } 
       }
@@ -541,12 +541,10 @@ function plotarGraficoTendenciaIdade(response) {
     },
     options: {
       scales: {
-        x: { title: { display: true, text: "Saúde Mental" } },
-        y: { beginAtZero: true, title: { display: true, text: "Quantidade" } },
+        x: { title: { display: true, text: "Saúde Mental" }},
+        y: { beginAtZero: true, title: { display: true, text: "Quantidade" }},
       },
     },
   });
 }
-
-
 </script>

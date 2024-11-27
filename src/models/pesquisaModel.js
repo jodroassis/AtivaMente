@@ -49,8 +49,8 @@ function calcularFrequenciaAtividade() {
 
 function calcularSaudeMental() {
   var instrucao = `select saude_mental, 
-                        (count(*) * 100 / (select count(*) from pesquisa)) as porcentagem from pesquisa
-                    where saude_mental in ('excelente', 'boa', 'regular')
+                        (count(*) / (select count(*) from pesquisa)) * 100 as porcentagem from pesquisa
+                    where saude_mental in ('excelente', 'regular')
                     group by saude_mental;`;
   console.log("Executando a instrução SQL: \n" + instrucao);
   return database.executar(instrucao);
@@ -111,14 +111,12 @@ function cadastrar(
   return database.executar(instrucao);
 }
 
-// NOVOS GRAFICOS
+// NOVOS GRÁFICOS
 
 function alimentacaoSaudeMental() {
     var instrucao = `
-      select saude_mental, alimentacao, (count(*) * 100 / (select count(*) from pesquisa 
-                                        where saude_mental in('excelente', 'fraca', 'regular'))) as porcentagem
+      select saude_mental, alimentacao, (count(*) / (select count(*) from pesquisa) * 100) as porcentagem
       from pesquisa
-        where saude_mental in ('excelente', 'fraca', 'regular') and alimentacao in ('saudavel', 'balanceada', 'desregrada', 'vegetariana')
         group by saude_mental, alimentacao;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
@@ -135,7 +133,6 @@ function alimentacaoSaudeMental() {
           else '61+'
         end as faixa_etaria,
         saude_mental, count(*) as quantidade from pesquisa
-            where saude_mental in ('excelente', 'regular', 'fraca')
             group by faixa_etaria, saude_mental
             order by faixa_etaria, saude_mental;
     `;
